@@ -1,0 +1,77 @@
+{
+  "common": {
+    "home": "Home",
+    "games": "Games",
+    "categories": "Categories",
+    "search": "Search",
+    "play": "Play",
+    "loading": "Loading...",
+    "error": "Error",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "navigation": {
+    "home": "Home",
+    "games": "Games",
+    "categories": "Categories",
+    "search": "Search"
+  },
+  "home": {
+    "title": "Free Online H5 Games",
+    "subtitle": "Play the best HTML5 games in your browser",
+    "featured": "Featured Games",
+    "popular": "Popular Games",
+    "new": "New Games",
+    "trending": "Trending Now"
+  },
+  "games": {
+    "playNow": "Play Now",
+    "title": "All Games",
+    "searchPlaceholder": "Search games...",
+    "filterByCategory": "Filter by Category",
+    "sortBy": "Sort by",
+    "sortOptions": {
+      "popular": "Most Popular",
+      "newest": "Newest",
+      "rating": "Highest Rated"
+    },
+    "playCount": "{count} plays",
+    "rating": "Rating {rating}",
+    "noGamesFound": "No games found"
+  },
+  "gameDetail": {
+    "playNow": "Play Now",
+    "description": "Description",
+    "category": "Category",
+    "tags": "Tags",
+    "share": "Share",
+    "embed": "Embed",
+    "relatedGames": "Related Games",
+    "youMayAlsoLike": "You May Also Like"
+  },
+  "categories": {
+    "title": "Game Categories",
+    "allCategories": "All Categories"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithGitHub": "Sign in with GitHub",
+    "signInWithEmail": "Sign in with Email",
+    "email": "Email",
+    "password": "Password",
+    "createAccount": "Create Account",
+    "forgotPassword": "Forgot Password?",
+    "welcomeBack": "Welcome Back",
+    "createNewAccount": "Create New Account"
+  },
+  "footer": {
+    "about": "About Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact",
+    "copyright": "© 2024 Game Station. All rights reserved."
+  }
+}

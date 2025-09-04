@@ -1,0 +1,30 @@
+{
+  "domains": ["your-domain.com"],
+  "redirects": [
+    {
+      "source": "/dashboard",
+      "destination": "/dashboard/games",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "ALLOW-FROM https://trusted-game-sites.com"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-src https://trusted-game-sites.com"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  }
+}
