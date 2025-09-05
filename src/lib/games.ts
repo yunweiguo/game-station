@@ -4,7 +4,8 @@ import { generateGamePlaceholder } from './images';
 export interface Game {
   id: string;
   slug: string;
-  name: string;
+  title: string;
+  name: string; // 保持向后兼容
   description: string;
   thumbnail: string;
   iframe_url: string;
@@ -89,6 +90,7 @@ export async function getFeaturedGames(): Promise<Game[]> {
 
     return (data || []).map(game => ({
       ...game,
+      name: game.title, // 将 title 映射到 name 以保持向后兼容
       playCount: game.play_count
     }));
   } catch (error) {
@@ -149,6 +151,7 @@ export async function getPopularGames(): Promise<Game[]> {
 
     return (data || []).map(game => ({
       ...game,
+      name: game.title, // 将 title 映射到 name 以保持向后兼容
       playCount: game.play_count
     }));
   } catch (error) {
@@ -193,6 +196,7 @@ export async function getGames(options?: {
 
   const games = (data || []).map(game => ({
     ...game,
+    name: game.title, // 将 title 映射到 name 以保持向后兼容
     playCount: game.play_count
   }));
 
@@ -225,6 +229,7 @@ export async function getGameBySlug(slug: string): Promise<Game | null> {
 
   return {
     ...data,
+    name: data.title, // 将 title 映射到 name 以保持向后兼容
     playCount: data.play_count || 0,
     category: data.categories?.name || '',
     categoryName: data.categories?.name || '',
@@ -274,7 +279,7 @@ export async function advancedSearchGames(filters: AdvancedSearchFilters): Promi
 
   // Search query
   if (filters.query && filters.query.trim()) {
-    query = query.or(`name.ilike.%${filters.query}%,description.ilike.%${filters.query}%,tags.cs.{${filters.query}}`);
+    query = query.or(`title.ilike.%${filters.query}%,description.ilike.%${filters.query}%,tags.cs.{${filters.query}}`);
   }
 
   // Category filter
@@ -417,6 +422,7 @@ export async function getAllGames(): Promise<Game[]> {
 
     return (data || []).map(game => ({
       ...game,
+      name: game.title, // 将 title 映射到 name 以保持向后兼容
       playCount: game.play_count
     }));
   } catch (error) {
@@ -441,6 +447,7 @@ export async function getGamesByCategory(categorySlug: string): Promise<Game[]> 
 
     return (data || []).map(game => ({
       ...game,
+      name: game.title, // 将 title 映射到 name 以保持向后兼容
       playCount: game.play_count
     }));
   } catch (error) {
@@ -508,6 +515,7 @@ export async function getRelatedGames(categoryId: string, excludeGameId: string)
 
     return (data || []).map(game => ({
       ...game,
+      name: game.title, // 将 title 映射到 name 以保持向后兼容
       playCount: game.play_count
     }));
   } catch (error) {

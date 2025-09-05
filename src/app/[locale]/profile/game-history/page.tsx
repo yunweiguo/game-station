@@ -35,8 +35,8 @@ interface GameHistory {
     id: string;
     name: string;
     description: string;
-    thumbnail_url: string;
-    category: string;
+    thumbnail: string;
+    category_id: string;
     tags: string[];
     rating: number;
     play_count: number;
@@ -308,7 +308,7 @@ export default function GameHistoryPage() {
                           >
                             <div className="relative group">
                               <img
-                                src={item.games.thumbnail_url}
+                                src={item.games.thumbnail}
                                 alt={item.games.name}
                                 className="w-full h-48 object-cover rounded-lg group-hover:opacity-90 transition-opacity"
                               />
@@ -343,7 +343,7 @@ export default function GameHistoryPage() {
                                 </div>
                               </div>
                               <div className="flex flex-wrap gap-2 mb-3">
-                                <Badge variant="secondary">{item.games.category}</Badge>
+                                <Badge variant="secondary">{item.games.category_id}</Badge>
                                 {item.games.tags.slice(0, 3).map(tag => (
                                   <Badge key={tag} variant="outline" className="text-xs">
                                     {tag}

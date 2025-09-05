@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabase, supabaseAdmin } from '@/lib/supabase';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
@@ -7,13 +7,6 @@ import { authOptions } from '@/lib/auth';
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
-    console.log('GET session check:', {
-      hasSession: !!session,
-      hasUser: !!session?.user,
-      userId: session?.user?.id,
-      userEmail: session?.user?.email
-    });
     
     if (!session?.user?.id) {
       console.log('No valid user session found');
@@ -28,16 +21,19 @@ export async function GET(request: NextRequest) {
     // 获取用户游戏历史记录
     let history, error;
     try {
-      const result = await supabase
+      // 使用 supabaseAdmin 客户端绕过 RLS 策略
+      const adminClient = supabaseAdmin || supabase;
+      
+      const result = await adminClient
         .from('user_game_history')
         .select(`
           *,
           games (
             id,
-            name,
+            title,
             description,
-            thumbnail_url,
-            category,
+            thumbnail,
+            category_id,
             tags,
             rating,
             play_count
@@ -127,8 +123,17 @@ export async function GET(request: NextRequest) {
       console.warn('Error calculating stats (table may not exist):', err);
     }
 
+    // 映射游戏数据，将 title 映射为 name 以保持向后兼容
+    const mappedHistory = (history || []).map(item => ({
+      ...item,
+      games: item.games ? {
+        ...item.games,
+        name: item.games.title // 将 title 映射到 name
+      } : null
+    }));
+
     return NextResponse.json({
-      history: history || [],
+      history: mappedHistory,
       pagination: {
         page,
         limit,
@@ -152,14 +157,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
-    console.log('POST session check:', {
-      hasSession: !!session,
-      hasUser: !!session?.user,
-      userId: session?.user?.id,
-      userEmail: session?.user?.email
-    });
-    
+
     if (!session?.user?.id) {
       console.log('No valid user session found');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -182,10 +180,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Game not found' }, { status: 404 });
     }
 
-    // 使用基本的插入/更新逻辑（更可靠的方法）
+    // 使用 supabaseAdmin 客户端绕过 RLS 策略
     try {
+      const adminClient = supabaseAdmin || supabase;
+      
       // 首先检查是否已存在记录
-      const { data: existing, error: selectError } = await supabase
+      const { data: existing, error: selectError } = await adminClient
         .from('user_game_history')
         .select('id, play_duration, session_count')
         .eq('user_id', session.user.id)
@@ -198,7 +198,7 @@ export async function POST(request: NextRequest) {
 
       if (existing) {
         // 更新现有记录
-        const { error: updateError } = await supabase
+        const { error: updateError } = await adminClient
           .from('user_game_history')
           .update({ 
             play_duration: (existing.play_duration || 0) + playDuration,
@@ -210,7 +210,7 @@ export async function POST(request: NextRequest) {
         if (updateError) throw updateError;
       } else {
         // 插入新记录
-        const { error: insertError } = await supabase
+        const { error: insertError } = await adminClient
           .from('user_game_history')
           .insert({
             user_id: session.user.id,

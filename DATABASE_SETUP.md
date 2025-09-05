@@ -6,7 +6,7 @@
 
 ### 1. 执行SQL文件
 
-运行 `user-game-history.sql` 文件来创建必要的表、索引和函数：
+运行 `database-complete-init.sql` 文件来创建必要的表、索引和函数：
 
 ```bash
 # 在Supabase SQL编辑器中执行此文件的内容
