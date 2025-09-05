@@ -3,6 +3,8 @@
 import { SessionProvider } from "next-auth/react"
 import { LanguageProvider } from "@/contexts/LanguageContext"
 import { NextIntlClientProvider } from 'next-intl'
+import { ErrorBoundary } from "@/components/ErrorBoundary"
+import { ToastContainer } from "@/components/ui/toast"
 
 // Client-side providers wrapper
 function ClientProviders({ children, messages, locale }: { 
@@ -14,7 +16,10 @@ function ClientProviders({ children, messages, locale }: {
     <SessionProvider>
       <NextIntlClientProvider messages={messages} locale={locale}>
         <LanguageProvider>
-          {children}
+          <ErrorBoundary>
+            {children}
+            <ToastContainer />
+          </ErrorBoundary>
         </LanguageProvider>
       </NextIntlClientProvider>
     </SessionProvider>
