@@ -110,7 +110,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
         tags: tags || existingGame.tags,
         featured: featured !== undefined ? featured : existingGame.featured,
         popular: popular !== undefined ? popular : existingGame.popular,
-        new: isNew !== undefined ? isNew : existingGame.new,
+        new: isNew !== undefined ? isNew : existingGame['new'],
         trending: trending !== undefined ? trending : existingGame.trending,
         status: status || existingGame.status,
         updated_at: new Date().toISOString()

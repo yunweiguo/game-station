@@ -9,8 +9,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Icons } from "@/components/ui/icons"
 import Link from "next/link"
+import { useTranslations } from 'next-intl'
 
 export default function SignIn() {
+  const t = useTranslations('auth')
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -68,11 +70,11 @@ export default function SignIn() {
       if (result?.ok) {
         router.push("/auth/callback")
       } else {
-        setError("Invalid email or password")
+        setError(t('errors.invalidCredentials'))
       }
     } catch (error) {
       console.error("Sign in error:", error)
-      setError("An error occurred during sign in")
+      setError(t('errors.general'))
     } finally {
       setIsLoading(false)
     }
@@ -86,9 +88,9 @@ export default function SignIn() {
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Card className="w-[400px]">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl text-center">Sign in</CardTitle>
+          <CardTitle className="text-2xl text-center">{t('signIn.title')}</CardTitle>
           <CardDescription className="text-center">
-            Enter your email and password to sign in to your account
+            {t('signIn.description')}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -114,19 +116,24 @@ export default function SignIn() {
                     {provider.name}
                     {provider.id === "google" && !googleAvailable && (
                       <span className="ml-2 text-xs text-orange-600">
-                        (网络不可用)
+                        ({t('errors.serviceUnavailable')})
                       </span>
                     )}
                     {provider.id === "github" && !githubAvailable && (
                       <span className="ml-2 text-xs text-orange-600">
-                        (网络不可用)
+                        ({t('errors.serviceUnavailable')})
                       </span>
                     )}
                   </Button>
                 ))}
             {(!googleAvailable || !githubAvailable) && (
               <div className="text-xs text-gray-500 text-center">
-                提示：{!googleAvailable && 'Google'}{!googleAvailable && !githubAvailable && ' 和 '}{!githubAvailable && 'GitHub'} 服务在当前网络环境下可能不可用，建议使用邮箱登录
+                {t('errors.serviceUnavailableTip', {
+                  services: [
+                    !googleAvailable && 'Google',
+                    !githubAvailable && 'GitHub'
+                  ].filter(Boolean).join(' and ')
+                })}
               </div>
             )}
           </div>
@@ -136,7 +143,7 @@ export default function SignIn() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
+                {t('orContinueWith')}
               </span>
             </div>
           </div>
@@ -148,7 +155,7 @@ export default function SignIn() {
           <form onSubmit={handleSubmit}>
             <div className="grid gap-2">
               <div className="grid gap-1">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('email')}</Label>
                 <Input
                   id="email"
                   placeholder="name@example.com"
@@ -162,10 +169,10 @@ export default function SignIn() {
                 />
               </div>
               <div className="grid gap-1">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t('password')}</Label>
                 <Input
                   id="password"
-                  placeholder="Password"
+                  placeholder={t('password')}
                   type="password"
                   autoCapitalize="none"
                   autoComplete="current-password"
@@ -178,14 +185,14 @@ export default function SignIn() {
                 {isLoading && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                Sign In
+                {t('signIn.title')}
               </Button>
             </div>
           </form>
           <div className="text-center text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
+            {t('noAccount')}{" "}
             <Link href="/auth/signup" className="underline underline-offset-4 hover:text-primary">
-              Sign up
+              {t('signUp.title')}
             </Link>
           </div>
         </CardContent>

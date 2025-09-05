@@ -14,11 +14,26 @@ export async function POST(request: NextRequest) {
     }
 
     if (action === 'play') {
+      // 先获取当前播放次数
+      const { data: currentGame, error: fetchError } = await supabase
+        .from('games')
+        .select('play_count')
+        .eq('id', gameId)
+        .single();
+
+      if (fetchError) {
+        console.error('Error fetching game:', fetchError);
+        return NextResponse.json(
+          { error: 'Failed to fetch game' },
+          { status: 500 }
+        );
+      }
+
       // 增加游戏播放次数
       const { error } = await supabase
         .from('games')
         .update({ 
-          play_count: supabase.raw('play_count + 1'),
+          play_count: (currentGame.play_count || 0) + 1,
           updated_at: new Date().toISOString()
         })
         .eq('id', gameId);

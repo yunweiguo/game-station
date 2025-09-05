@@ -48,24 +48,50 @@
     "share": "Share",
     "embed": "Embed",
     "relatedGames": "Related Games",
-    "youMayAlsoLike": "You May Also Like"
+    "youMayAlsoLike": "You May Also Like",
+    "back": "Back",
+    "playCount": "{count} plays"
   },
   "categories": {
     "title": "Game Categories",
     "allCategories": "All Categories"
   },
   "auth": {
-    "signIn": "Sign In",
+    "signIn": {
+      "title": "Sign In",
+      "description": "Enter your email and password to sign in to your account"
+    },
+    "signUp": {
+      "title": "Create an account",
+      "description": "Enter your information to create your account",
+      "createAccount": "Create Account"
+    },
     "signOut": "Sign Out",
     "signInWithGoogle": "Sign in with Google",
     "signInWithGitHub": "Sign in with GitHub",
     "signInWithEmail": "Sign in with Email",
     "email": "Email",
     "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "username": "Username",
     "createAccount": "Create Account",
     "forgotPassword": "Forgot Password?",
     "welcomeBack": "Welcome Back",
-    "createNewAccount": "Create New Account"
+    "createNewAccount": "Create New Account",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "orContinueWith": "Or continue with",
+    "callback": {
+      "loading": "Processing authentication..."
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "general": "An error occurred during sign in",
+      "registrationFailed": "Registration failed",
+      "passwordsDontMatch": "Passwords don't match",
+      "serviceUnavailable": "Service unavailable",
+      "serviceUnavailableTip": "Tip: {services} services may not be available in the current network environment, email registration is recommended"
+    }
   },
   "footer": {
     "about": "About Us",
@@ -73,5 +99,103 @@
     "terms": "Terms of Service",
     "contact": "Contact",
     "copyright": "© 2024 Game Station. All rights reserved."
+  },
+  "achievements": {
+    "title": "Achievement System",
+    "subtitle": "Track your gaming progress and unlock various achievements!",
+    "tabs": {
+      "achievements": "Achievements",
+      "statistics": "Statistics",
+      "notifications": "Notifications"
+    },
+    "stats": {
+      "unlockedAchievements": "Unlocked Achievements",
+      "totalPlayTime": "Total Play Time",
+      "playCount": "Play Count",
+      "currentStreak": "Current Streak",
+      "gamingStatistics": "Gaming Statistics",
+      "yourGamingData": "Your gaming data",
+      "achievementProgress": "Achievement Progress",
+      "yourAchievementCompletion": "Your achievement completion",
+      "totalAchievements": "Total Achievements",
+      "unlocked": "Unlocked",
+      "completionRate": "Completion Rate",
+      "totalPoints": "Total Points"
+    },
+    "sections": {
+      "unlocked": "Unlocked Achievements",
+      "unlockedDescription": "Achievements you have earned",
+      "inProgress": "In Progress",
+      "inProgressDescription": "Achievements you're working on",
+      "locked": "Locked",
+      "lockedDescription": "Achievements you haven't unlocked yet",
+      "progress": "Progress",
+      "requires": "Requires: {value} {type}"
+    },
+    "status": {
+      "unlocked": "Unlocked",
+      "locked": "Locked",
+      "unread": "Unread"
+    },
+    "notifications": {
+      "title": "Achievement Notifications",
+      "description": "You have {count} notifications",
+      "unreadDescription": " ({count} unread)",
+      "noNotifications": "No notifications available"
+    },
+    "types": {
+      "games": "games",
+      "plays": "plays"
+    },
+    "noData": {
+      "achievements": "No achievement data available",
+      "statistics": "No statistics data available"
+    },
+    "loginRequired": {
+      "title": "Please Login",
+      "message": "You need to login to view the achievement system"
+    },
+    "error": {
+      "title": "Loading Failed",
+      "message": "Network error",
+      "retry": "Retry"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "subtitle": "Manage your account information and preferences",
+    "sections": {
+      "favoriteGames": "Favorite Games",
+      "favoriteDescription": "Games you've marked as favorites",
+      "playHistory": "Play History",
+      "historyDescription": "Recently played games",
+      "recentAchievements": "Recent Achievements",
+      "achievementsDescription": "Your latest unlocked achievements"
+    },
+    "stats": {
+      "unlockedAchievements": "Unlocked Achievements",
+      "totalPlayTime": "Total Play Time",
+      "playCount": "Play Count",
+      "currentStreak": "Current Streak"
+    },
+    "form": {
+      "username": "Username",
+      "avatarUrl": "Avatar URL",
+      "usernamePlaceholder": "Enter your username",
+      "avatarPlaceholder": "Enter avatar URL",
+      "save": "Save",
+      "cancel": "Cancel",
+      "editProfile": "Edit Profile"
+    },
+    "noData": {
+      "favoriteGames": "No favorite games yet. Start adding some!",
+      "playHistory": "No play history yet. Start playing some games!"
+    },
+    "gameInfo": {
+      "lastPlayed": "Last played: {date}",
+      "playCount": "Play count: {count}",
+      "playAgain": "Play Again"
+    },
+    "viewAll": "View All"
   }
 }

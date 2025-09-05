@@ -248,17 +248,82 @@ export async function getCategories(): Promise<Category[]> {
   return data || [];
 }
 
+export interface AdvancedSearchFilters {
+  query?: string;
+  category?: string;
+  tags?: string[];
+  minRating?: number;
+  maxRating?: number;
+  sortBy?: 'relevance' | 'rating' | 'play_count' | 'created_at';
+  sortOrder?: 'asc' | 'desc';
+  difficulty?: 'easy' | 'medium' | 'hard';
+  featured?: boolean;
+  popular?: boolean;
+  new?: boolean;
+}
+
 export async function searchGames(query: string): Promise<Game[]> {
-  const { data, error } = await supabase
+  return advancedSearchGames({ query });
+}
+
+export async function advancedSearchGames(filters: AdvancedSearchFilters): Promise<Game[]> {
+  let query = supabase
     .from('games')
     .select('*')
-    .eq('status', 'active')
-    .or(`name.ilike.%${query}%,description.ilike.%${query}%`)
-    .order('rating', { ascending: false })
-    .limit(20);
+    .eq('status', 'active');
+
+  // Search query
+  if (filters.query && filters.query.trim()) {
+    query = query.or(`name.ilike.%${filters.query}%,description.ilike.%${filters.query}%,tags.cs.{${filters.query}}`);
+  }
+
+  // Category filter
+  if (filters.category) {
+    query = query.eq('category_id', filters.category);
+  }
+
+  // Tags filter
+  if (filters.tags && filters.tags.length > 0) {
+    query = query.contains('tags', filters.tags);
+  }
+
+  // Rating range
+  if (filters.minRating !== undefined) {
+    query = query.gte('rating', filters.minRating);
+  }
+  if (filters.maxRating !== undefined) {
+    query = query.lte('rating', filters.maxRating);
+  }
+
+  // Game type filters
+  if (filters.featured !== undefined) {
+    query = query.eq('featured', filters.featured);
+  }
+  if (filters.popular !== undefined) {
+    query = query.eq('popular', filters.popular);
+  }
+  if (filters.new !== undefined) {
+    query = query.eq('new', filters.new);
+  }
+
+  // Sorting
+  if (filters.sortBy && filters.sortBy !== 'relevance') {
+    const ascending = filters.sortOrder === 'asc';
+    query = query.order(filters.sortBy, { ascending });
+  } else if (filters.query) {
+    // For relevance sorting with query, prioritize by name match, then rating
+    query = query.order('rating', { ascending: false });
+  } else {
+    query = query.order('created_at', { ascending: false });
+  }
+
+  // Limit results
+  query = query.limit(50);
+
+  const { data, error } = await query;
 
   if (error) {
-    console.error('Error searching games:', error);
+    console.error('Error in advanced search:', error);
     return [];
   }
 

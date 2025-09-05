@@ -9,8 +9,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Icons } from "@/components/ui/icons"
 import Link from "next/link"
+import { useTranslations } from 'next-intl'
 
 export default function SignUp() {
+  const t = useTranslations('auth')
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -52,7 +54,7 @@ export default function SignUp() {
     e.preventDefault()
     
     if (password !== confirmPassword) {
-      setError("Passwords don't match")
+      setError(t('errors.passwordsDontMatch'))
       return
     }
 
@@ -92,11 +94,11 @@ export default function SignUp() {
           router.push("/auth/signin?message=Registration+successful");
         }
       } else {
-        setError(data.error || "Registration failed")
+        setError(data.error || t('errors.registrationFailed'))
       }
     } catch (error) {
       console.error("Sign up error:", error)
-      setError("An error occurred during registration")
+      setError(t('errors.general'))
     } finally {
       setIsLoading(false)
     }
@@ -106,9 +108,9 @@ export default function SignUp() {
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Card className="w-[400px]">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl text-center">Create an account</CardTitle>
+          <CardTitle className="text-2xl text-center">{t('signUp.title')}</CardTitle>
           <CardDescription className="text-center">
-            Enter your information to create your account
+            {t('signUp.description')}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -122,7 +124,7 @@ export default function SignUp() {
               GitHub
               {!githubAvailable && (
                 <span className="ml-2 text-xs text-orange-600">
-                  (网络不可用)
+                  ({t('errors.serviceUnavailable')})
                 </span>
               )}
             </Button>
@@ -135,13 +137,18 @@ export default function SignUp() {
               Google
               {!googleAvailable && (
                 <span className="ml-2 text-xs text-orange-600">
-                  (网络不可用)
+                  ({t('errors.serviceUnavailable')})
                 </span>
               )}
             </Button>
             {(!googleAvailable || !githubAvailable) && (
               <div className="text-xs text-gray-500 text-center">
-                提示：{!googleAvailable && 'Google'}{!googleAvailable && !githubAvailable && ' 和 '}{!githubAvailable && 'GitHub'} 服务在当前网络环境下可能不可用，建议使用邮箱注册
+                {t('errors.serviceUnavailableTip', {
+                  services: [
+                    !googleAvailable && 'Google',
+                    !githubAvailable && 'GitHub'
+                  ].filter(Boolean).join(' and ')
+                })}
               </div>
             )}
           </div>
@@ -151,7 +158,7 @@ export default function SignUp() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
+                {t('orContinueWith')}
               </span>
             </div>
           </div>
@@ -163,10 +170,10 @@ export default function SignUp() {
           <form onSubmit={handleSubmit}>
             <div className="grid gap-2">
               <div className="grid gap-1">
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username">{t('username')}</Label>
                 <Input
                   id="username"
-                  placeholder="username"
+                  placeholder={t('username')}
                   type="text"
                   autoCapitalize="none"
                   autoCorrect="off"
@@ -176,7 +183,7 @@ export default function SignUp() {
                 />
               </div>
               <div className="grid gap-1">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('email')}</Label>
                 <Input
                   id="email"
                   placeholder="name@example.com"
@@ -190,10 +197,10 @@ export default function SignUp() {
                 />
               </div>
               <div className="grid gap-1">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t('password')}</Label>
                 <Input
                   id="password"
-                  placeholder="Password"
+                  placeholder={t('password')}
                   type="password"
                   autoCapitalize="none"
                   autoComplete="new-password"
@@ -203,10 +210,10 @@ export default function SignUp() {
                 />
               </div>
               <div className="grid gap-1">
-                <Label htmlFor="confirm-password">Confirm Password</Label>
+                <Label htmlFor="confirm-password">{t('confirmPassword')}</Label>
                 <Input
                   id="confirm-password"
-                  placeholder="Confirm Password"
+                  placeholder={t('confirmPassword')}
                   type="password"
                   autoCapitalize="none"
                   autoComplete="new-password"
@@ -219,14 +226,14 @@ export default function SignUp() {
                 {isLoading && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                Create Account
+                {t('signUp.createAccount')}
               </Button>
             </div>
           </form>
           <div className="text-center text-sm text-muted-foreground">
-            Already have an account?{" "}
+            {t('haveAccount')}{" "}
             <Link href="/auth/signin" className="underline underline-offset-4 hover:text-primary">
-              Sign in
+              {t('signIn.title')}
             </Link>
           </div>
         </CardContent>

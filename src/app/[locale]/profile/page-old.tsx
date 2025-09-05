@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useTranslations } from 'next-intl'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -11,6 +12,7 @@ import { GameCard } from "@/components/GameCard"
 import { Icons } from "@/components/ui/icons"
 import { Game } from "@/lib/games"
 import Image from "next/image"
+import { Trophy, Target, TrendingUp, Clock } from "lucide-react"
 
 interface UserProfile {
   username?: string
@@ -26,9 +28,13 @@ interface UserProfile {
 export default function ProfilePage() {
   const { data: session, status } = useSession()
   const router = useRouter()
+  const t = useTranslations('profile')
+  const tAchievements = useTranslations('achievements')
   const [profile, setProfile] = useState<UserProfile>({})
   const [favoriteGames, setFavoriteGames] = useState<Game[]>([])
   const [historyGames, setHistoryGames] = useState<Game[]>([])
+  const [userStats, setUserStats] = useState<any>(null)
+  const [achievements, setAchievements] = useState<any[]>([])
   const [isEditing, setIsEditing] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [username, setUsername] = useState("")
@@ -45,6 +51,8 @@ export default function ProfilePage() {
       fetchProfile()
       fetchFavoriteGames()
       fetchHistoryGames()
+      fetchUserStats()
+      fetchAchievements()
     }
   }, [session])
 
@@ -86,6 +94,30 @@ export default function ProfilePage() {
     }
   }
 
+  const fetchUserStats = async () => {
+    try {
+      const response = await fetch("/api/user/achievements?type=stats")
+      if (response.ok) {
+        const data = await response.json()
+        setUserStats(data)
+      }
+    } catch (error) {
+      console.error("Error fetching user stats:", error)
+    }
+  }
+
+  const fetchAchievements = async () => {
+    try {
+      const response = await fetch("/api/user/achievements?type=achievements")
+      if (response.ok) {
+        const data = await response.json()
+        setAchievements(data)
+      }
+    } catch (error) {
+      console.error("Error fetching achievements:", error)
+    }
+  }
+
   const handleSaveProfile = async () => {
     setIsLoading(true)
     try {
@@ -120,15 +152,76 @@ export default function ProfilePage() {
     return null
   }
 
+  const formatTime = (seconds: number) => {
+    const hours = Math.floor(seconds / 3600)
+    const minutes = Math.floor((seconds % 3600) / 60)
+    return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`
+  }
+
+  const unlockedAchievements = achievements.filter(a => a.unlocked).length
+
   return (
     <div className="container mx-auto py-8">
       <div className="grid gap-8">
+        {/* Stats Overview */}
+        {userStats && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-4">
+                  <Trophy className="h-8 w-8 text-yellow-500" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">{t('stats.unlockedAchievements')}</p>
+                    <p className="text-2xl font-bold">{unlockedAchievements}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-4">
+                  <Clock className="h-8 w-8 text-blue-500" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">{t('stats.totalPlayTime')}</p>
+                    <p className="text-2xl font-bold">{formatTime(userStats.total_play_time)}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-4">
+                  <Target className="h-8 w-8 text-green-500" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">{t('stats.playCount')}</p>
+                    <p className="text-2xl font-bold">{userStats.total_play_count}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-4">
+                  <TrendingUp className="h-8 w-8 text-orange-500" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">{t('stats.currentStreak')}</p>
+                    <p className="text-2xl font-bold">{userStats.current_streak}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
         {/* Profile Section */}
         <Card>
           <CardHeader>
-            <CardTitle>Profile</CardTitle>
+            <CardTitle>{t('title')}</CardTitle>
             <CardDescription>
-              Manage your account information and preferences
+              {t('subtitle')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -255,6 +348,56 @@ export default function ProfilePage() {
             )}
           </CardContent>
         </Card>
+
+        {/* Recent Achievements */}
+        {achievements.length > 0 && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <Trophy className="h-5 w-5" />
+                  <span>Recent Achievements</span>
+                </div>
+                <Button variant="outline" size="sm" onClick={() => router.push('/achievements')}>
+                  View All
+                </Button>
+              </CardTitle>
+              <CardDescription>
+                Your latest unlocked achievements
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {achievements.slice(0, 6).map((achievement) => (
+                  <div
+                    key={achievement.id}
+                    className={`p-4 rounded-lg border ${
+                      achievement.unlocked ? 'bg-yellow-50 border-yellow-200' : 'bg-gray-50 border-gray-200'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="text-2xl">{achievement.icon}</div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold">{achievement.name}</h3>
+                        <p className="text-sm text-gray-600">{achievement.description}</p>
+                        <div className="flex items-center justify-between mt-2">
+                          <span className={`text-xs font-medium ${
+                            achievement.unlocked ? 'text-green-600' : 'text-gray-500'
+                          }`}>
+                            {achievement.unlocked ? 'Unlocked' : 'Locked'}
+                          </span>
+                          <span className="text-xs text-gray-500">
+                            +{achievement.points} pts
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   )

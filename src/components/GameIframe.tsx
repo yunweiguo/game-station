@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Gamepad2, Maximize, Minimize, RefreshCw } from 'lucide-react';
 
 interface GameIframeProps {
@@ -15,6 +15,47 @@ interface GameIframeProps {
 export function GameIframe({ game }: GameIframeProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [hasRecordedPlay, setHasRecordedPlay] = useState(false);
+
+  // 记录游戏播放统计和游戏历史
+  useEffect(() => {
+    if (!hasRecordedPlay && game.id) {
+      const recordPlay = async () => {
+        try {
+          // 记录游戏统计
+          await fetch('/api/games/stats', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              gameId: game.id,
+              action: 'play'
+            }),
+          });
+
+          // 记录游戏历史
+          await fetch('/api/user/games', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              gameId: game.id,
+              action: 'add',
+              type: 'history'
+            }),
+          });
+
+          setHasRecordedPlay(true);
+        } catch (error) {
+          console.error('Error recording game play:', error);
+        }
+      };
+
+      recordPlay();
+    }
+  }, [game.id, hasRecordedPlay]);
 
   const handleLoad = () => {
     setIsLoading(false);

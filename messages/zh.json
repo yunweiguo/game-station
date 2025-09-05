@@ -1,0 +1,201 @@
+{
+  "common": {
+    "home": "首页",
+    "games": "游戏",
+    "categories": "分类",
+    "search": "搜索",
+    "play": "开始游戏",
+    "loading": "加载中...",
+    "error": "错误",
+    "back": "返回",
+    "next": "下一页",
+    "previous": "上一页"
+  },
+  "navigation": {
+    "home": "首页",
+    "games": "游戏",
+    "categories": "分类",
+    "search": "搜索"
+  },
+  "home": {
+    "title": "免费在线H5游戏",
+    "subtitle": "在浏览器中玩最好的HTML5游戏",
+    "featured": "精选游戏",
+    "popular": "热门游戏",
+    "new": "新游戏",
+    "trending": "热门推荐"
+  },
+  "games": {
+    "playNow": "立即开始",
+    "title": "所有游戏",
+    "searchPlaceholder": "搜索游戏...",
+    "filterByCategory": "按分类筛选",
+    "sortBy": "排序方式",
+    "sortOptions": {
+      "popular": "最受欢迎",
+      "newest": "最新发布",
+      "rating": "评分最高"
+    },
+    "playCount": "{count} 次游戏",
+    "rating": "评分 {rating}",
+    "noGamesFound": "未找到游戏"
+  },
+  "gameDetail": {
+    "playNow": "立即开始",
+    "description": "游戏介绍",
+    "category": "游戏分类",
+    "tags": "标签",
+    "share": "分享",
+    "embed": "嵌入",
+    "relatedGames": "相关游戏",
+    "youMayAlsoLike": "你可能还喜欢",
+    "back": "返回",
+    "playCount": "{count} 次游戏"
+  },
+  "categories": {
+    "title": "游戏分类",
+    "allCategories": "所有分类"
+  },
+  "auth": {
+    "signIn": {
+      "title": "登录",
+      "description": "输入您的邮箱和密码来登录您的账户"
+    },
+    "signUp": {
+      "title": "创建账户",
+      "description": "输入您的信息来创建您的账户",
+      "createAccount": "创建账户"
+    },
+    "signOut": "退出",
+    "signInWithGoogle": "使用Google登录",
+    "signInWithGitHub": "使用GitHub登录",
+    "signInWithEmail": "使用邮箱登录",
+    "email": "邮箱",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "username": "用户名",
+    "createAccount": "创建账户",
+    "forgotPassword": "忘记密码？",
+    "welcomeBack": "欢迎回来",
+    "createNewAccount": "创建新账户",
+    "noAccount": "还没有账户？",
+    "haveAccount": "已有账户？",
+    "orContinueWith": "或者继续使用",
+    "callback": {
+      "loading": "正在处理身份验证..."
+    },
+    "errors": {
+      "invalidCredentials": "邮箱或密码错误",
+      "general": "登录过程中发生错误",
+      "registrationFailed": "注册失败",
+      "passwordsDontMatch": "密码不匹配",
+      "serviceUnavailable": "服务不可用",
+      "serviceUnavailableTip": "提示：{services} 服务在当前网络环境下可能不可用，建议使用邮箱登录"
+    }
+  },
+  "footer": {
+    "about": "关于我们",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "contact": "联系我们",
+    "copyright": "© 2024 Game Station. 版权所有。"
+  },
+  "achievements": {
+    "title": "成就系统",
+    "subtitle": "追踪你的游戏进度，解锁各种成就！",
+    "tabs": {
+      "achievements": "成就",
+      "statistics": "统计",
+      "notifications": "通知"
+    },
+    "stats": {
+      "unlockedAchievements": "已解锁成就",
+      "totalPlayTime": "总游戏时长",
+      "playCount": "游戏次数",
+      "currentStreak": "连续天数",
+      "gamingStatistics": "游戏统计",
+      "yourGamingData": "你的游戏数据",
+      "achievementProgress": "成就进度",
+      "yourAchievementCompletion": "你的成就完成情况",
+      "totalAchievements": "总成就数",
+      "unlocked": "已解锁",
+      "completionRate": "完成率",
+      "totalPoints": "总积分"
+    },
+    "sections": {
+      "unlocked": "已解锁成就",
+      "unlockedDescription": "你已经获得的成就",
+      "inProgress": "进行中",
+      "inProgressDescription": "你正在努力的成就",
+      "locked": "未解锁",
+      "lockedDescription": "你尚未解锁的成就",
+      "progress": "进度",
+      "requires": "需要：{value} {type}"
+    },
+    "status": {
+      "unlocked": "已解锁",
+      "locked": "未解锁",
+      "unread": "未读"
+    },
+    "notifications": {
+      "title": "成就通知",
+      "description": "你有 {count} 条通知",
+      "unreadDescription": "（{count} 条未读）",
+      "noNotifications": "暂无通知"
+    },
+    "types": {
+      "games": "游戏",
+      "plays": "次游戏"
+    },
+    "noData": {
+      "achievements": "暂无成就数据",
+      "statistics": "暂无统计数据"
+    },
+    "loginRequired": {
+      "title": "请登录",
+      "message": "你需要登录才能查看成就系统"
+    },
+    "error": {
+      "title": "加载失败",
+      "message": "网络错误",
+      "retry": "重试"
+    }
+  },
+  "profile": {
+    "title": "个人资料",
+    "subtitle": "管理你的账户信息和偏好设置",
+    "sections": {
+      "favoriteGames": "收藏的游戏",
+      "favoriteDescription": "你标记为收藏的游戏",
+      "playHistory": "游戏历史",
+      "historyDescription": "最近玩过的游戏",
+      "recentAchievements": "最近成就",
+      "achievementsDescription": "你最新解锁的成就"
+    },
+    "stats": {
+      "unlockedAchievements": "已解锁成就",
+      "totalPlayTime": "总游戏时长",
+      "playCount": "游戏次数",
+      "currentStreak": "连续天数"
+    },
+    "form": {
+      "username": "用户名",
+      "avatarUrl": "头像URL",
+      "usernamePlaceholder": "输入你的用户名",
+      "avatarPlaceholder": "输入头像URL",
+      "save": "保存",
+      "cancel": "取消",
+      "editProfile": "编辑资料"
+    },
+    "noData": {
+      "favoriteGames": "还没有收藏游戏，开始添加一些吧！",
+      "playHistory": "还没有游戏历史，开始玩游戏吧！"
+    },
+    "gameInfo": {
+      "lastPlayed": "最后游戏：{date}",
+      "playCount": "游戏次数：{count}",
+      "playAgain": "再次游戏"
+    },
+    "viewAll": "查看全部"
+  }
+}

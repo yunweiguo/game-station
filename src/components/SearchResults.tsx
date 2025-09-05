@@ -1,29 +1,42 @@
 import { GameCard } from '@/components/GameCard';
-import { searchGames } from '@/lib/games';
+import { advancedSearchGames, AdvancedSearchFilters } from '@/lib/games';
 import { getTranslations } from 'next-intl/server';
 
 interface SearchResultsProps {
   query: string;
+  searchParams?: {
+    category?: string;
+    tags?: string;
+    minRating?: string;
+    maxRating?: string;
+    sortBy?: string;
+    sortOrder?: string;
+    difficulty?: string;
+    featured?: string;
+    popular?: string;
+    new?: string;
+  };
 }
 
-export async function SearchResults({ query }: SearchResultsProps) {
+export async function SearchResults({ query, searchParams }: SearchResultsProps) {
   const t = await getTranslations('games');
   
-  if (!query) {
-    return (
-      <div className="text-center py-12">
-        <div className="text-gray-400 text-6xl mb-4">🔍</div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          Search for Games
-        </h3>
-        <p className="text-gray-600">
-          Enter a game name, category, or keyword to find your favorite games
-        </p>
-      </div>
-    );
-  }
+  // Build search filters
+  const filters: AdvancedSearchFilters = {
+    query,
+    category: searchParams?.category,
+    tags: searchParams?.tags ? searchParams.tags.split(',') : [],
+    minRating: searchParams?.minRating ? parseFloat(searchParams.minRating) : undefined,
+    maxRating: searchParams?.maxRating ? parseFloat(searchParams.maxRating) : undefined,
+    sortBy: searchParams?.sortBy as any || 'relevance',
+    sortOrder: searchParams?.sortOrder as any || 'desc',
+    difficulty: searchParams?.difficulty as any,
+    featured: searchParams?.featured === 'true',
+    popular: searchParams?.popular === 'true',
+    new: searchParams?.new === 'true',
+  };
 
-  const games = await searchGames(query);
+  const games = await advancedSearchGames(filters);
 
   if (games.length === 0) {
     return (

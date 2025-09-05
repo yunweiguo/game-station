@@ -1,15 +1,24 @@
 "use client"
 
 import { SessionProvider } from "next-auth/react"
+import { LanguageProvider } from "@/contexts/LanguageContext"
+import { NextIntlClientProvider } from 'next-intl'
 
-export default function Providers({ 
-  children 
-}: { 
-  children: React.ReactNode 
+// Client-side providers wrapper
+function ClientProviders({ children, messages, locale }: { 
+  children: React.ReactNode, 
+  messages: any, 
+  locale: string 
 }) {
   return (
     <SessionProvider>
-      {children}
+      <NextIntlClientProvider messages={messages} locale={locale}>
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </NextIntlClientProvider>
     </SessionProvider>
   )
 }
+
+export default ClientProviders
