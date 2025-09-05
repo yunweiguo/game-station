@@ -16,6 +16,11 @@ export interface Game {
   status: 'active' | 'inactive';
   created_at: string;
   updated_at: string;
+  category?: string;
+  categoryName?: string;
+  categorySlug?: string;
+  categoryColor?: string;
+  categoryIcon?: string;
 }
 
 export interface Category {
@@ -197,7 +202,16 @@ export async function getGames(options?: {
 export async function getGameBySlug(slug: string): Promise<Game | null> {
   const { data, error } = await supabase
     .from('games')
-    .select('*')
+    .select(`
+      *,
+      categories (
+        id,
+        name,
+        slug,
+        color,
+        icon
+      )
+    `)
     .eq('slug', slug)
     .eq('status', 'active')
     .single();
@@ -207,7 +221,17 @@ export async function getGameBySlug(slug: string): Promise<Game | null> {
     return null;
   }
 
-  return data ? { ...data, playCount: data.play_count } : null;
+  if (!data) return null;
+
+  return {
+    ...data,
+    playCount: data.play_count || 0,
+    category: data.categories?.name || '',
+    categoryName: data.categories?.name || '',
+    categorySlug: data.categories?.slug || '',
+    categoryColor: data.categories?.color || '#3b82f6',
+    categoryIcon: data.categories?.icon || '🎮'
+  };
 }
 
 export async function getCategories(): Promise<Category[]> {

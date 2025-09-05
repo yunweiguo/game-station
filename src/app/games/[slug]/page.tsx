@@ -106,10 +106,13 @@ export default async function GamePage({ params }: GamePageProps) {
               )}
               
               {/* Play Button */}
-              <button className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2">
+              <Link 
+                href={`/games/${game.slug}/play`}
+                className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2 text-center"
+              >
                 <Gamepad2 className="w-5 h-5" />
                 {t('playNow')}
-              </button>
+              </Link>
             </div>
             
             {/* Game Player */}
