@@ -221,6 +221,11 @@ export async function POST(request: NextRequest) {
         console.warn('user_game_history table does not exist, skipping history update');
         return NextResponse.json({ success: true, message: 'Table not initialized, skipping update' });
       }
+      // 如果是RLS策略错误（用户未登录），这也是正常的
+      if (error.code === '42501' || error.message?.includes('row-level security policy')) {
+        console.warn('User not authenticated or RLS policy violation, skipping history update');
+        return NextResponse.json({ success: true, message: 'User not authenticated, skipping update' });
+      }
       return NextResponse.json({ error: 'Failed to update game history' }, { status: 500 });
     }
 

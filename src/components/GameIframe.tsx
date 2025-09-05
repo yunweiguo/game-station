@@ -22,7 +22,7 @@ export function GameIframe({ game }: GameIframeProps) {
     if (!hasRecordedPlay && game.id) {
       const recordPlay = async () => {
         try {
-          // 记录游戏统计
+          // 记录游戏统计（始终记录）
           await fetch('/api/games/stats', {
             method: 'POST',
             headers: {
@@ -34,8 +34,9 @@ export function GameIframe({ game }: GameIframeProps) {
             }),
           });
 
-          // 记录游戏历史
-          await fetch('/api/user/game-history', {
+          // 只在用户可能登录的情况下尝试记录游戏历史
+          // 如果用户未登录，API会优雅地处理并返回401
+          const historyResponse = await fetch('/api/user/game-history', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -46,9 +47,19 @@ export function GameIframe({ game }: GameIframeProps) {
             }),
           });
 
+          // 如果返回401，说明用户未登录，这是正常的
+          if (historyResponse.status === 401) {
+            console.log('User not logged in, skipping game history recording');
+          } else if (!historyResponse.ok) {
+            const errorData = await historyResponse.json();
+            console.warn('Game history recording warning:', errorData);
+          }
+
           setHasRecordedPlay(true);
         } catch (error) {
           console.error('Error recording game play:', error);
+          // 即使出错也标记为已记录，避免重复尝试
+          setHasRecordedPlay(true);
         }
       };
 
