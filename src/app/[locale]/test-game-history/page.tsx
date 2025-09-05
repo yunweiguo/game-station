@@ -17,12 +17,12 @@ export default function TestGameHistoryPage() {
       const getResponse = await fetch('/api/user/game-history');
       const getResult = await getResponse.json();
       
-      // 测试POST请求
+      // 测试POST请求 - 使用真实的游戏ID
       const postResponse = await fetch('/api/user/game-history', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          gameId: 'test-game-123', 
+          gameId: 'f72ae0ad-cf31-4119-a274-b1dd25738a8d', // Puzzle Master
           playDuration: 60 
         }),
       });
@@ -30,10 +30,12 @@ export default function TestGameHistoryPage() {
       
       setTestResult(JSON.stringify({
         session: session ? `Logged in as ${session.user.email}` : 'Not logged in',
+        getUserId: session?.user?.id,
         getStatus: getResponse.status,
         getResult,
         postStatus: postResponse.status,
-        postResult
+        postResult,
+        timestamp: new Date().toISOString()
       }, null, 2));
     } catch (error) {
       setTestResult(`Error: ${error}`);
