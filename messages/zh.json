@@ -197,5 +197,369 @@
       "playAgain": "再次游戏"
     },
     "viewAll": "查看全部"
+  },
+  "about": {
+    "title": "关于游戏站",
+    "subtitle": "您免费的在线HTML5游戏终极目的地",
+    "lastUpdated": "最后更新：2024年11月",
+    "ourStory": {
+      "title": "我们的故事",
+      "content1": "游戏站成立于2024年，使命简单：让每个人在任何地方都能享受游戏。我们相信优秀的游戏不应该需要昂贵的硬件或复杂的安装过程。",
+      "content2": "从一个小型的精选HTML5游戏集合开始，我们已经发展成为一个涵盖多个分类、数百款游戏的综合平台。我们充满热情的游戏玩家和开发团队努力确保平台上的每款游戏都符合我们的高质量和娱乐标准。",
+      "content3": "如今，游戏站为全球数百万玩家提供服务，提供即时、有趣的游戏体验，可以在任何带有网络浏览器的设备上游玩。"
+    },
+    "mission": {
+      "title": "我们的使命",
+      "description": "我们致力于让游戏对所有年龄段的玩家都变得可访问、愉快和安全。",
+      "values": {
+        "accessibility": {
+          "title": "可访问性",
+          "description": "免费游戏，适用于任何设备，无需下载"
+        },
+        "quality": {
+          "title": "质量",
+          "description": "精心挑选的游戏，提供最佳游戏体验"
+        },
+        "community": {
+          "title": "社区",
+          "description": "为全球游戏玩家建立一个安全、包容的空间"
+        }
+      }
+    },
+    "team": {
+      "title": "我们的团队",
+      "description": "认识游戏站背后的充满激情的个人"
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "我们很乐意听取您的意见！与我们的团队联系。",
+    "getInTouch": {
+      "title": "联系我们",
+      "email": {
+        "title": "邮件支持",
+        "description": "一般咨询和支持"
+      },
+      "discord": {
+        "title": "Discord社区",
+        "description": "加入我们的游戏社区"
+      },
+      "twitter": {
+        "title": "Twitter",
+        "description": "关注我们获取更新和新闻"
+      }
+    },
+    "faq": {
+      "title": "常见问题",
+      "questions": {
+        "q1": {
+          "title": "如何创建账户？",
+          "answer": "点击右上角的\"登录\"按钮并按照注册流程操作。快速且免费！"
+        },
+        "q2": {
+          "title": "所有游戏真的都是免费的吗？",
+          "answer": "是的！游戏站上的所有游戏都完全免费。没有隐藏费用或订阅。"
+        },
+        "q3": {
+          "title": "我可以推荐游戏吗？",
+          "answer": "当然！我们很乐意听取社区的意见。请通过邮件向我们发送游戏推荐。"
+        },
+        "q4": {
+          "title": "需要下载什么吗？",
+          "answer": "无需下载！我们所有的游戏都是基于HTML5的，直接在您的网络浏览器中运行。"
+        }
+      }
+    },
+    "responseTime": {
+      "title": "响应时间",
+      "description": "我们通常在以下时间内回复咨询：",
+      "emailTime": {
+        "time": "24-48小时",
+        "channel": "邮件"
+      },
+      "discordTime": {
+        "time": "1-2小时",
+        "channel": "Discord"
+      },
+      "socialTime": {
+        "time": "2-4小时",
+        "channel": "社交媒体"
+      }
+    }
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "subtitle": "我们如何收集、使用和保护您的个人信息",
+    "lastUpdated": "最后更新：2024年11月",
+    "introduction": {
+      "title": "介绍",
+      "content1": "欢迎使用游戏站。我们尊重您的隐私，并致力于保护您的个人数据。本隐私政策说明了当您访问我们的网站和使用我们的服务时，我们如何收集、使用、披露和保护您的信息。",
+      "content2": "通过使用游戏站，您同意本政策中描述的做法。"
+    },
+    "informationWeCollect": {
+      "title": "我们收集的信息",
+      "personalInformation": {
+        "title": "个人信息",
+        "content": "当您创建账户时，我们会收集：",
+        "items": {
+          "name": "姓名和用户名",
+          "email": "电子邮件地址",
+          "password": "密码（加密）",
+          "profile": "个人资料信息和偏好设置"
+        }
+      },
+      "usageData": {
+        "title": "使用数据",
+        "content": "我们会自动收集有关您与我们服务互动的信息：",
+        "items": {
+          "pages": "访问的页面和停留时间",
+          "time": "访问的日期和时间",
+          "games": "玩过的游戏和持续时间",
+          "device": "设备信息和浏览器类型"
+        }
+      },
+      "cookies": {
+        "title": "Cookie",
+        "content": "我们使用cookie和类似的跟踪技术来增强您的体验、分析流量和个性化内容。"
+      }
+    },
+    "howWeUseInformation": {
+      "title": "我们如何使用您的信息",
+      "items": {
+        "provide": "提供和维护我们的服务",
+        "improve": "改善和个性化您的体验",
+        "communicate": "与您就您的账户进行沟通",
+        "analyze": "分析使用模式并改善我们的服务",
+        "security": "确保我们平台的安全性和完整性"
+      }
+    },
+    "dataProtection": {
+      "title": "数据保护",
+      "content1": "我们实施适当的安全措施来保护您的个人信息免受未经授权的访问、更改、披露或破坏。",
+      "content2": "您的数据存储在安全的服务器上，只有需要执行其工作的授权人员才能访问。"
+    },
+    "dataSharing": {
+      "title": "数据共享",
+      "content1": "除非您同意，否则我们不会出售、交易或以其他方式将您的个人信息转让给第三方，除非本政策中所述。",
+      "content2": "我们仅在以下情况下共享您的信息：",
+      "exceptions": {
+        "legal": "当法律要求或遵守法律程序时",
+        "protect": "保护和捍卫我们的权利或财产时",
+        "rights": "保护我们用户的安全和保障时"
+      }
+    },
+    "yourRights": {
+      "title": "您的权利",
+      "items": {
+        "access": "访问您的个人信息",
+        "correct": "更正不准确的信息",
+        "delete": "要求删除您的个人数据",
+        "object": "反对处理您的个人数据",
+        "portable": "要求数据可移植性"
+      }
+    },
+    "childrenPrivacy": {
+      "title": "儿童隐私",
+      "content": "我们的服务不适用于13岁以下的儿童。我们不会故意收集13岁以下儿童的个人信息。"
+    },
+    "changesToPolicy": {
+      "title": "政策变更",
+      "content": "我们可能会不时更新此隐私政策。我们将通过在此页面上发布新政策来通知您任何变更。"
+    },
+    "contactUs": {
+      "title": "联系我们",
+      "content": "如果您对此隐私政策有任何疑问，请联系我们：",
+      "emailLabel": "电子邮件"
+    }
+  },
+  "terms": {
+    "title": "服务条款",
+    "subtitle": "使用游戏站前，请仔细阅读这些条款",
+    "lastUpdated": "最后更新：2024年11月",
+    "acceptance": {
+      "title": "条款接受",
+      "content": "通过访问和使用游戏站，您接受并同意受本协议条款和规定的约束。"
+    },
+    "services": {
+      "title": "我们的服务",
+      "content1": "游戏站提供玩免费在线HTML5游戏的平台。我们的服务包括访问各种分类的数百款游戏。",
+      "content2": "我们保留随时修改、暂停或终止我们的服务的权利，恕不另行通知。"
+    },
+    "userAccounts": {
+      "title": "用户账户",
+      "content1": "要访问某些功能，您必须创建账户。您负责：",
+      "responsibilities": {
+        "accurate": "提供准确和完整的信息",
+        "security": "维护您账户凭据的安全性",
+        "liability": "您账户下发生的所有活动"
+      },
+      "content2": "您必须年满13岁才能创建账户。"
+    },
+    "acceptableUse": {
+      "title": "可接受使用",
+      "content": "您同意仅将我们的服务用于合法目的，并遵守这些条款。您不得：",
+      "prohibited": {
+        "title": "禁止的活动",
+        "illegal": "从事非法活动或推广非法内容",
+        "harmful": "传输恶意软件、病毒或其他有害代码",
+        "infringing": "侵犯他人的知识产权",
+        "harassment": "骚扰、虐待或伤害他人",
+        "spam": "发送未经请求的通信或垃圾邮件",
+        "malware": "试图未经授权访问我们的系统",
+        "impersonation": "冒充他人或歪曲您的身份"
+      }
+    },
+    "intellectualProperty": {
+      "title": "知识产权",
+      "content1": "游戏站上的所有内容，包括游戏、文本、图形和标志，都是游戏站或其内容许可方的财产。",
+      "content2": "未经我们的明确书面许可，您不得复制、分发或创建衍生作品。",
+      "content3": "游戏站及其标志是游戏站的商标。保留所有权利。"
+    },
+    "userContent": {
+      "title": "用户内容",
+      "content1": "您保留对我们平台提交的任何内容的所有权。通过提交内容，您授予我们使用、复制和分发该内容的许可。",
+      "license": {
+        "title": "许可授予",
+        "rights": {
+          "reproduce": "复制您的内容",
+          "modify": "修改和适应您的内容",
+          "distribute": "将您的内容分发给其他用户",
+          "display": "在我们的平台上显示您的内容"
+        }
+      },
+      "responsibility": "您对您提交的内容负全部责任，并确保其不违反任何法律或他人的权利。"
+    },
+    "disclaimer": {
+      "title": "免责声明",
+      "content1": "游戏站按\"原样\"提供，不作任何明示或暗示的保证。",
+      "content2": "我们不保证我们的服务将不中断、及时、安全或无错误。"
+    },
+    "limitationOfLiability": {
+      "title": "责任限制",
+      "content1": "在任何情况下，游戏站均不对因使用我们的服务或与本服务相关而产生的任何间接、偶然、特殊或后果性损害负责。",
+      "content2": "我们的总责任不应超过您为访问我们的服务而支付的金额（如果有）。"
+    },
+    "indemnification": {
+      "title": "赔偿",
+      "content": "您同意赔偿并使游戏站免受因您使用我们的服务或违反这些条款而产生的任何索赔、损害或费用的影响。"
+    },
+    "termination": {
+      "title": "终止",
+      "content1": "我们可能会自行决定终止或暂停您的账户和对我们服务的访问，恕不另行通知，适用于我们认为违反这些条款或对其他用户有害的行为。",
+      "content2": "终止后，这些条款中按其性质应继续有效的所有规定应继续完全有效。"
+    },
+    "governingLaw": {
+      "title": "管辖法律",
+      "content": "这些条款应受游戏站运营地法律管辖并根据其解释，不考虑其法律冲突规定。"
+    },
+    "changesToTerms": {
+      "title": "条款变更",
+      "content1": "我们保留随时修改这些条款的权利。变更在发布后立即生效。",
+      "content2": "变更后继续使用我们的服务即表示您接受新条款。"
+    },
+    "contactUs": {
+      "title": "联系我们",
+      "content": "如果您对这些服务条款有任何疑问，请联系我们：",
+      "emailLabel": "电子邮件"
+    }
+  },
+  "cookies": {
+    "title": "Cookie政策",
+    "subtitle": "我们在游戏站上如何使用cookie和类似技术",
+    "lastUpdated": "最后更新：2024年11月",
+    "whatAreCookies": {
+      "title": "什么是Cookie？",
+      "content1": "Cookie是当您访问网站时放置在您的计算机或移动设备上的小型文本文件。它们被广泛用于使网站更高效地运行，并向网站所有者提供信息。",
+      "content2": "Cookie允许网站在一段时间内记住您的操作和偏好（如登录、语言、字体大小和其他显示偏好）。"
+    },
+    "howWeUseCookies": {
+      "title": "我们如何使用Cookie",
+      "content": "我们使用cookie和类似的跟踪技术来增强您在游戏站上的体验："
+    },
+    "cookieTypes": {
+      "title": "我们使用的Cookie类型",
+      "necessary": {
+        "title": "必要的Cookie",
+        "description": "网站正常运行所必需的",
+        "purpose": "身份验证、安全和核心功能"
+      },
+      "analytics": {
+        "title": "分析Cookie",
+        "description": "帮助我们了解访问者如何与我们的网站互动",
+        "purpose": "改善用户体验和网站性能"
+      },
+      "preferences": {
+        "title": "偏好Cookie",
+        "description": "记住您的设置和偏好",
+        "purpose": "语言设置、主题偏好、游戏偏好"
+      },
+      "marketing": {
+        "title": "营销Cookie",
+        "description": "用于跟踪广告效果",
+        "purpose": "个性化广告和营销活动"
+      },
+      "purpose": "用途"
+    },
+    "specificCookies": {
+      "title": "我们使用的具体Cookie"
+    },
+    "cookieTable": {
+      "name": "Cookie名称",
+      "purpose": "用途",
+      "duration": "持续时间",
+      "type": "类型",
+      "typeAnalytics": "分析",
+      "typeNecessary": "必要",
+      "cookies": {
+        "_ga": {
+          "purpose": "Google Analytics - 跟踪用户行为",
+          "duration": "2年"
+        },
+        "_gid": {
+          "purpose": "Google Analytics - 唯一用户识别",
+          "duration": "24小时"
+        },
+        "session": {
+          "purpose": "用户会话管理",
+          "duration": "会话"
+        },
+        "csrf": {
+          "purpose": "跨站请求伪造保护",
+          "duration": "会话"
+        }
+      }
+    },
+    "managingCookies": {
+      "title": "管理Cookie",
+      "content1": "您可以通过浏览器设置控制您的设备上如何使用cookie。大多数网络浏览器允许您：",
+      "content2": "请注意，阻止某些类型的cookie可能会影响您在我们网站上的体验以及我们能够提供的服务。",
+      "browsers": {
+        "title": "浏览器说明",
+        "chrome": "Chrome：设置 → 隐私和安全 → Cookie和其他网站数据",
+        "firefox": "Firefox：选项 → 隐私和安全 → Cookie和网站数据",
+        "safari": "Safari：偏好设置 → 隐私 → Cookie和网站数据",
+        "edge": "Edge：设置 → 隐私、搜索和服务 → Cookie"
+      }
+    },
+    "thirdPartyCookies": {
+      "title": "第三方Cookie",
+      "content1": "我们可能会使用在您的设备上设置cookie的第三方服务，例如Google Analytics用于网站分析。",
+      "content2": "这些第三方有自己的隐私政策，我们鼓励您查看它们以了解他们如何使用cookie。"
+    },
+    "cookieConsent": {
+      "title": "Cookie同意",
+      "content1": "当您第一次访问游戏站时，我们会向您展示cookie同意横幅，允许您选择同意哪种类型的cookie。",
+      "content2": "您可以随时通过点击我们网站页脚中的cookie设置链接来更改您的cookie偏好。",
+      "content3": "继续使用我们的网站而不更改设置表示您同意我们按照本政策中所述使用cookie。"
+    },
+    "updates": {
+      "title": "政策更新",
+      "content": "我们可能会不时更新此cookie政策以反映技术或法规要求的变化。"
+    },
+    "contact": {
+      "title": "联系我们",
+      "content": "如果您对我们使用cookie有任何疑问，请联系我们：",
+      "emailLabel": "电子邮件"
+    }
   }
 }

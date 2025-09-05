@@ -48,9 +48,9 @@
     "share": "Share",
     "embed": "Embed",
     "relatedGames": "Related Games",
-    "youMayAlsoLike": "You May Also Like",
-    "back": "Back",
-    "playCount": "{count} plays"
+    "back": "Back to Games",
+    "playCount": "{count} plays",
+    "youMayAlsoLike": "You May Also Like"
   },
   "categories": {
     "title": "Game Categories",
@@ -197,5 +197,409 @@
       "playAgain": "Play Again"
     },
     "viewAll": "View All"
+  },
+  "gameHistory": {
+    "title": "Game History",
+    "subtitle": "Track your gaming journey and see your play statistics",
+    "stats": {
+      "totalGames": "Total Games",
+      "totalPlayTime": "Total Play Time",
+      "totalSessions": "Total Sessions",
+      "averagePlayTime": "Avg. Play Time"
+    },
+    "actions": {
+      "clearAll": "Clear All",
+      "playAgain": "Play Again",
+      "loadMore": "Load More"
+    },
+    "info": {
+      "lastPlayed": "Last played: {date}",
+      "firstPlayed": "First played: {date}",
+      "sessions": "{count} sessions",
+      "duration": "{duration}"
+    },
+    "empty": {
+      "title": "No Game History Yet",
+      "description": "Start playing games to build your gaming history!",
+      "browseGames": "Browse Games"
+    },
+    "confirm": {
+      "deleteGame": "Are you sure you want to remove this game from your history?",
+      "clearAll": "Are you sure you want to clear all your game history? This action cannot be undone."
+    },
+    "error": {
+      "loadFailed": "Failed to load game history",
+      "deleteFailed": "Failed to remove game from history",
+      "clearFailed": "Failed to clear game history"
+    },
+    "success": {
+      "gameRemoved": "Game removed from history",
+      "historyCleared": "All game history cleared"
+    }
+  },
+  "about": {
+    "title": "About Game Station",
+    "subtitle": "Your ultimate destination for free online HTML5 games",
+    "lastUpdated": "Last updated: November 2024",
+    "ourStory": {
+      "title": "Our Story",
+      "content1": "Game Station was founded in 2024 with a simple mission: to make gaming accessible to everyone, everywhere. We believe that great games shouldn't require expensive hardware or complicated installations.",
+      "content2": "What started as a small collection of curated HTML5 games has grown into a comprehensive platform featuring hundreds of games across multiple categories. Our team of passionate gamers and developers works tirelessly to ensure that every game on our platform meets our high standards of quality and entertainment.",
+      "content3": "Today, Game Station serves millions of players worldwide, providing instant access to fun, engaging games that can be played on any device with a web browser."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "We're committed to making gaming accessible, enjoyable, and safe for players of all ages.",
+      "values": {
+        "accessibility": {
+          "title": "Accessibility",
+          "description": "Free games that work on any device, no downloads required"
+        },
+        "quality": {
+          "title": "Quality",
+          "description": "Carefully selected games that provide the best gaming experience"
+        },
+        "community": {
+          "title": "Community",
+          "description": "Building a safe, inclusive space for gamers worldwide"
+        }
+      }
+    },
+    "team": {
+      "title": "Our Team",
+      "description": "Meet the passionate individuals behind Game Station"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you! Get in touch with our team.",
+    "getInTouch": {
+      "title": "Get in Touch",
+      "email": {
+        "title": "Email Support",
+        "description": "For general inquiries and support"
+      },
+      "discord": {
+        "title": "Discord Community",
+        "description": "Join our gaming community"
+      },
+      "twitter": {
+        "title": "Twitter",
+        "description": "Follow us for updates and news"
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "questions": {
+        "q1": {
+          "title": "How do I create an account?",
+          "answer": "Click the 'Sign In' button in the top right corner and follow the registration process. It's quick and free!"
+        },
+        "q2": {
+          "title": "Are all games really free?",
+          "answer": "Yes! All games on Game Station are completely free to play. No hidden fees or subscriptions."
+        },
+        "q3": {
+          "title": "Can I suggest a game?",
+          "answer": "Absolutely! We love hearing from our community. Send us an email with your game suggestions."
+        },
+        "q4": {
+          "title": "Do I need to download anything?",
+          "answer": "No downloads required! All our games are HTML5-based and run directly in your web browser."
+        }
+      }
+    },
+    "responseTime": {
+      "title": "Response Times",
+      "description": "We typically respond to inquiries within these timeframes:",
+      "emailTime": {
+        "time": "24-48 hours",
+        "channel": "Email"
+      },
+      "discordTime": {
+        "time": "1-2 hours",
+        "channel": "Discord"
+      },
+      "socialTime": {
+        "time": "2-4 hours",
+        "channel": "Social Media"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "How we collect, use, and protect your personal information",
+    "lastUpdated": "Last updated: November 2024",
+    "introduction": {
+      "title": "Introduction",
+      "content1": "Welcome to Game Station. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.",
+      "content2": "By using Game Station, you agree to the practices described in this policy."
+    },
+    "informationWeCollect": {
+      "title": "Information We Collect",
+      "personalInformation": {
+        "title": "Personal Information",
+        "content": "When you create an account, we collect:",
+        "items": {
+          "name": "Name and username",
+          "email": "Email address",
+          "password": "Password (encrypted)",
+          "profile": "Profile information and preferences"
+        }
+      },
+      "usageData": {
+        "title": "Usage Data",
+        "content": "We automatically collect information about your interaction with our services:",
+        "items": {
+          "pages": "Pages visited and time spent",
+          "time": "Date and time of access",
+          "games": "Games played and duration",
+          "device": "Device information and browser type"
+        }
+      },
+      "cookies": {
+        "title": "Cookies",
+        "content": "We use cookies and similar tracking technologies to enhance your experience, analyze traffic, and personalize content."
+      }
+    },
+    "howWeUseInformation": {
+      "title": "How We Use Your Information",
+      "items": {
+        "provide": "To provide and maintain our services",
+        "improve": "To improve and personalize your experience",
+        "communicate": "To communicate with you about your account",
+        "analyze": "To analyze usage patterns and improve our services",
+        "security": "To ensure the security and integrity of our platform"
+      }
+    },
+    "dataProtection": {
+      "title": "Data Protection",
+      "content1": "We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.",
+      "content2": "Your data is stored on secure servers and is accessible only to authorized personnel who need it to perform their jobs."
+    },
+    "dataSharing": {
+      "title": "Data Sharing",
+      "content1": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.",
+      "content2": "We may share your information only in the following circumstances:",
+      "exceptions": {
+        "legal": "When required by law or to comply with legal processes",
+        "protect": "To protect and defend our rights or property",
+        "rights": "To protect the safety and security of our users"
+      }
+    },
+    "yourRights": {
+      "title": "Your Rights",
+      "items": {
+        "access": "Access to your personal information",
+        "correct": "Correct inaccurate information",
+        "delete": "Request deletion of your personal data",
+        "object": "Object to processing of your personal data",
+        "portable": "Request data portability"
+      }
+    },
+    "childrenPrivacy": {
+      "title": "Children's Privacy",
+      "content": "Our services are not intended for children under 13. We do not knowingly collect personal information from children under 13."
+    },
+    "changesToPolicy": {
+      "title": "Changes to This Policy",
+      "content": "We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page."
+    },
+    "contactUs": {
+      "title": "Contact Us",
+      "content": "If you have any questions about this Privacy Policy, please contact us:",
+      "emailLabel": "Email"
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "subtitle": "Please read these terms carefully before using Game Station",
+    "lastUpdated": "Last updated: November 2024",
+    "acceptance": {
+      "title": "Acceptance of Terms",
+      "content": "By accessing and using Game Station, you accept and agree to be bound by the terms and provision of this agreement."
+    },
+    "services": {
+      "title": "Our Services",
+      "content1": "Game Station provides a platform for playing free online HTML5 games. Our services include access to hundreds of games across various categories.",
+      "content2": "We reserve the right to modify, suspend, or discontinue our services at any time without notice."
+    },
+    "userAccounts": {
+      "title": "User Accounts",
+      "content1": "To access certain features, you must create an account. You are responsible for:",
+      "responsibilities": {
+        "accurate": "Providing accurate and complete information",
+        "security": "Maintaining the security of your account credentials",
+        "liability": "All activities that occur under your account"
+      },
+      "content2": "You must be at least 13 years old to create an account."
+    },
+    "acceptableUse": {
+      "title": "Acceptable Use",
+      "content": "You agree to use our services only for lawful purposes and in accordance with these terms. You may not:",
+      "prohibited": {
+        "title": "Prohibited Activities",
+        "illegal": "Engage in illegal activities or promote illegal content",
+        "harmful": "Transmit malware, viruses, or other harmful code",
+        "infringing": "Infringe on the intellectual property rights of others",
+        "harassment": "Harass, abuse, or harm others",
+        "spam": "Send unsolicited communications or spam",
+        "malware": "Attempt to gain unauthorized access to our systems",
+        "impersonation": "Impersonate others or misrepresent your identity"
+      }
+    },
+    "intellectualProperty": {
+      "title": "Intellectual Property",
+      "content1": "All content on Game Station, including games, text, graphics, and logos, is the property of Game Station or its content licensors.",
+      "content2": "You may not reproduce, distribute, or create derivative works without our express written permission.",
+      "content3": "Game Station and its logo are trademarks of Game Station. All rights reserved."
+    },
+    "userContent": {
+      "title": "User Content",
+      "content1": "You retain ownership of any content you submit to our platform. By submitting content, you grant us a license to use, reproduce, and distribute that content.",
+      "license": {
+        "title": "License Grant",
+        "rights": {
+          "reproduce": "Reproduce your content",
+          "modify": "Modify and adapt your content",
+          "distribute": "Distribute your content to other users",
+          "display": "Display your content on our platform"
+        }
+      },
+      "responsibility": "You are solely responsible for the content you submit and ensure it does not violate any laws or rights of others."
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "content1": "Game Station is provided on an 'as is' basis without warranties of any kind, either express or implied.",
+      "content2": "We do not guarantee that our services will be uninterrupted, timely, secure, or error-free."
+    },
+    "limitationOfLiability": {
+      "title": "Limitation of Liability",
+      "content1": "In no event shall Game Station be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with our services.",
+      "content2": "Our total liability shall not exceed the amount paid by you, if any, for accessing our services."
+    },
+    "indemnification": {
+      "title": "Indemnification",
+      "content": "You agree to indemnify and hold Game Station harmless from any claims, damages, or expenses arising from your use of our services or violation of these terms."
+    },
+    "termination": {
+      "title": "Termination",
+      "content1": "We may terminate or suspend your account and access to our services at our sole discretion, without notice, for conduct that we believe violates these terms or is harmful to other users.",
+      "content2": "Upon termination, all provisions of these terms which by their nature should survive shall continue in full force and effect."
+    },
+    "governingLaw": {
+      "title": "Governing Law",
+      "content": "These terms shall be governed by and construed in accordance with the laws of the jurisdiction in which Game Station operates, without regard to its conflict of law provisions."
+    },
+    "changesToTerms": {
+      "title": "Changes to Terms",
+      "content1": "We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting.",
+      "content2": "Your continued use of our services after changes constitutes acceptance of the new terms."
+    },
+    "contactUs": {
+      "title": "Contact Us",
+      "content": "If you have any questions about these Terms of Service, please contact us:",
+      "emailLabel": "Email"
+    }
+  },
+  "cookies": {
+    "title": "Cookie Policy",
+    "subtitle": "How we use cookies and similar technologies on Game Station",
+    "lastUpdated": "Last updated: November 2024",
+    "whatAreCookies": {
+      "title": "What Are Cookies?",
+      "content1": "Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently and provide information to website owners.",
+      "content2": "Cookies allow websites to remember your actions and preferences (such as login, language, font size, and other display preferences) over a period of time."
+    },
+    "howWeUseCookies": {
+      "title": "How We Use Cookies",
+      "content": "We use cookies and similar tracking technologies for various purposes to enhance your experience on Game Station:"
+    },
+    "cookieTypes": {
+      "title": "Types of Cookies We Use",
+      "necessary": {
+        "title": "Necessary Cookies",
+        "description": "Essential for the website to function properly",
+        "purpose": "Authentication, security, and core functionality"
+      },
+      "analytics": {
+        "title": "Analytics Cookies",
+        "description": "Help us understand how visitors interact with our website",
+        "purpose": "Improving user experience and website performance"
+      },
+      "preferences": {
+        "title": "Preference Cookies",
+        "description": "Remember your settings and preferences",
+        "purpose": "Language settings, theme preferences, game preferences"
+      },
+      "marketing": {
+        "title": "Marketing Cookies",
+        "description": "Used to track advertising effectiveness",
+        "purpose": "Personalized advertisements and marketing campaigns"
+      },
+      "purpose": "Purpose"
+    },
+    "specificCookies": {
+      "title": "Specific Cookies We Use"
+    },
+    "cookieTable": {
+      "name": "Cookie Name",
+      "purpose": "Purpose",
+      "duration": "Duration",
+      "duration": "Duration",
+      "type": "Type",
+      "typeAnalytics": "Analytics",
+      "typeNecessary": "Necessary",
+      "cookies": {
+        "_ga": {
+          "purpose": "Google Analytics - tracks user behavior",
+          "duration": "2 years"
+        },
+        "_gid": {
+          "purpose": "Google Analytics - unique user identification",
+          "duration": "24 hours"
+        },
+        "session": {
+          "purpose": "User session management",
+          "duration": "Session"
+        },
+        "csrf": {
+          "purpose": "Cross-site request forgery protection",
+          "duration": "Session"
+        }
+      }
+    },
+    "managingCookies": {
+      "title": "Managing Cookies",
+      "content1": "You can control how cookies are used on your device through your browser settings. Most web browsers allow you to:",
+      "content2": "Please note that blocking certain types of cookies may affect your experience on our website and the services we are able to offer.",
+      "browsers": {
+        "title": "Browser Instructions",
+        "chrome": "Chrome: Settings → Privacy and security → Cookies and other site data",
+        "firefox": "Firefox: Options → Privacy & Security → Cookies and Site Data",
+        "safari": "Safari: Preferences → Privacy → Cookies and website data",
+        "edge": "Edge: Settings → Privacy, search, and services → Cookies"
+      }
+    },
+    "thirdPartyCookies": {
+      "title": "Third-Party Cookies",
+      "content1": "We may use third-party services that set cookies on your device, such as Google Analytics for website analytics.",
+      "content2": "These third parties have their own privacy policies and we encourage you to review them to understand how they use cookies."
+    },
+    "cookieConsent": {
+      "title": "Cookie Consent",
+      "content1": "When you first visit Game Station, you will be presented with a cookie consent banner that allows you to choose which types of cookies you consent to.",
+      "content2": "You can change your cookie preferences at any time by clicking the cookie settings link in the footer of our website.",
+      "content3": "Continuing to use our website without changing your settings indicates that you consent to our use of cookies as described in this policy."
+    },
+    "updates": {
+      "title": "Updates to This Policy",
+      "content": "We may update this cookie policy from time to time to reflect changes in technology or regulatory requirements."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "content": "If you have any questions about our use of cookies, please contact us:",
+      "emailLabel": "Email"
+    }
   }
 }

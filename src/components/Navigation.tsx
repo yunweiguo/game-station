@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signIn, signOut } from 'next-auth/react';
-import { Gamepad2, Search, User, LogOut, Trophy, Settings } from 'lucide-react';
+import { Gamepad2, Search, User, LogOut, Trophy, Settings, History } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
@@ -29,6 +29,7 @@ export function Navigation() {
   const userNavItems = [
     { href: `${basePath}/profile`, label: 'Profile', icon: User },
     { href: `${basePath}/achievements`, label: 'Achievements', icon: Trophy },
+    { href: `${basePath}/profile/game-history`, label: 'Game History', icon: History },
   ];
 
   // Check if user is admin

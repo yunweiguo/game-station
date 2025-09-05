@@ -1,3 +1,5 @@
+import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
 import { notFound } from 'next/navigation';
 import { GameCard } from '@/components/GameCard';
 import { getGamesByCategory, getCategoryBySlug } from '@/lib/games';
@@ -23,8 +25,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const games = await getGamesByCategory(slug);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Navigation />
+      
+      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <Link 
             href="/categories" 
@@ -64,7 +68,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             ))}
           </div>
         )}
-      </div>
+      </main>
+      
+      <Footer />
     </div>
   );
 }

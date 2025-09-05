@@ -1,4 +1,5 @@
 import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
 import { GameCard } from '@/components/GameCard';
 import { getFeaturedGames, getPopularGames } from '@/lib/games';
 import { getTranslations } from 'next-intl/server';
@@ -12,10 +13,10 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navigation />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <section className="text-center mb-12">
           <FadeIn duration={800}>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -57,6 +58,8 @@ export default async function HomePage() {
           </div>
         </section>
       </main>
+      
+      <Footer />
     </div>
   );
 }

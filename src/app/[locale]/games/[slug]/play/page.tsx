@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Gamepad2, ArrowLeft, Star, Eye, Clock, Tag, Maximize, Minimize, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
@@ -15,7 +15,7 @@ interface GamePageProps {
 }
 
 export default function GamePlayPage({ params }: GamePageProps) {
-  const { slug } = params;
+  const { slug } = use(params);
   const router = useRouter();
   const [game, setGame] = useState<any>(null);
   const [relatedGames, setRelatedGames] = useState<any[]>([]);

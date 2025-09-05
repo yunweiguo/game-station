@@ -1,5 +1,7 @@
 'use client';
 
+import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 import { SearchResultsClient } from '@/components/SearchResultsClient';
@@ -41,8 +43,10 @@ function SearchContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Navigation />
+      
+      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 flex justify-between items-start">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-4">
@@ -75,7 +79,9 @@ function SearchContent() {
             new: searchParams.get('new') || '',
           }}
         />
-      </div>
+      </main>
+      
+      <Footer />
     </div>
   );
 }

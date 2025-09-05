@@ -35,15 +35,14 @@ export function GameIframe({ game }: GameIframeProps) {
           });
 
           // 记录游戏历史
-          await fetch('/api/user/games', {
+          await fetch('/api/user/game-history', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
               gameId: game.id,
-              action: 'add',
-              type: 'history'
+              playDuration: 0
             }),
           });
 
