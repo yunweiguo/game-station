@@ -8,7 +8,15 @@ export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     
+    console.log('GET session check:', {
+      hasSession: !!session,
+      hasUser: !!session?.user,
+      userId: session?.user?.id,
+      userEmail: session?.user?.email
+    });
+    
     if (!session?.user?.id) {
+      console.log('No valid user session found');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -145,7 +153,15 @@ export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     
+    console.log('POST session check:', {
+      hasSession: !!session,
+      hasUser: !!session?.user,
+      userId: session?.user?.id,
+      userEmail: session?.user?.email
+    });
+    
     if (!session?.user?.id) {
+      console.log('No valid user session found');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
