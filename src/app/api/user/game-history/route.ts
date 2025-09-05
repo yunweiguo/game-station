@@ -166,53 +166,46 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Game not found' }, { status: 404 });
     }
 
-    // 使用数据库函数更新游戏历史记录
+    // 使用基本的插入/更新逻辑（更可靠的方法）
     try {
-      const { error } = await supabase.rpc('upsert_game_history', {
-        p_user_id: session.user.id,
-        p_game_id: gameId,
-        p_play_duration: playDuration
-      });
+      // 首先检查是否已存在记录
+      const { data: existing, error: selectError } = await supabase
+        .from('user_game_history')
+        .select('id, play_duration, session_count')
+        .eq('user_id', session.user.id)
+        .eq('game_id', gameId)
+        .single();
 
-      if (error) {
-        // 如果函数不存在，使用基本的插入/更新逻辑
-        if (error.code === '42883' || error.message?.includes('function upsert_game_history')) {
-          console.warn('upsert_game_history function not found, using basic logic');
-          
-          // 检查是否已存在记录
-          const { data: existing } = await supabase
-            .from('user_game_history')
-            .select('id')
-            .eq('user_id', session.user.id)
-            .eq('game_id', gameId)
-            .single();
-          
-          if (existing) {
-            // 更新现有记录
-            await supabase
-              .from('user_game_history')
-              .update({ 
-                play_duration: supabase.raw('play_duration + ' + playDuration),
-                session_count: supabase.raw('session_count + 1'),
-                last_played_at: new Date().toISOString()
-              })
-              .eq('id', existing.id);
-          } else {
-            // 插入新记录
-            await supabase
-              .from('user_game_history')
-              .insert({
-                user_id: session.user.id,
-                game_id: gameId,
-                play_duration: playDuration,
-                session_count: 1,
-                last_played_at: new Date().toISOString(),
-                first_played_at: new Date().toISOString()
-              });
-          }
-        } else {
-          throw error;
-        }
+      if (selectError && selectError.code !== 'PGRST116') { // PGRST116 = not found
+        throw selectError;
+      }
+
+      if (existing) {
+        // 更新现有记录
+        const { error: updateError } = await supabase
+          .from('user_game_history')
+          .update({ 
+            play_duration: (existing.play_duration || 0) + playDuration,
+            session_count: (existing.session_count || 0) + 1,
+            last_played_at: new Date().toISOString()
+          })
+          .eq('id', existing.id);
+
+        if (updateError) throw updateError;
+      } else {
+        // 插入新记录
+        const { error: insertError } = await supabase
+          .from('user_game_history')
+          .insert({
+            user_id: session.user.id,
+            game_id: gameId,
+            play_duration: playDuration,
+            session_count: 1,
+            last_played_at: new Date().toISOString(),
+            first_played_at: new Date().toISOString()
+          });
+
+        if (insertError) throw insertError;
       }
     } catch (error) {
       console.error('Error updating game history:', error);
