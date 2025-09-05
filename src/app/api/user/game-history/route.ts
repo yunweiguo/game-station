@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { getServerSession } from 'next-auth';
-import { authConfig } from '@/lib/auth';
+import { authOptions } from '@/lib/auth';
 
 // 获取用户游戏历史记录
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await getServerSession(authOptions);
     
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -143,7 +143,7 @@ export async function GET(request: NextRequest) {
 // 添加或更新游戏历史记录
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await getServerSession(authOptions);
     
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -234,7 +234,7 @@ export async function POST(request: NextRequest) {
 // 删除游戏历史记录
 export async function DELETE(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await getServerSession(authOptions);
     
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -281,7 +281,7 @@ export async function DELETE(request: NextRequest) {
 // 清空所有游戏历史记录
 export async function PUT(request: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const session = await getServerSession(authOptions);
     
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
