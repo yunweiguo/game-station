@@ -1,17 +1,3 @@
-import { Navigation } from '@/components/Navigation';
-import { Footer } from '@/components/Footer';
-import { GameCard } from '@/components/GameCard';
-import { getFeaturedGames, getPopularGames } from '@/lib/games';
-import { getTranslations } from 'next-intl/server';
-import { FadeIn } from '@/components/ui/animations';
-import { currentConfig } from '@/config/homepage';
-import { GameIframe } from '@/components/GameIframe';
-import { SEO } from '@/components/SEO';
-import { Button } from '@/components/ui/button';
-import { Gamepad2, Star, Play, Clock, Eye, Tag, CheckCircle, Lightbulb, Trophy, RefreshCw, Maximize } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-
 'use client';
 
 import { useState, useEffect } from 'react';
