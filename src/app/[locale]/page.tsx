@@ -5,29 +5,68 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { GameCard } from '@/components/GameCard';
 import { getFeaturedGames, getPopularGames } from '@/lib/games';
+import { getGameContentConfig } from '@/config/games';
 import { FadeIn } from '@/components/ui/animations';
-import { currentConfig } from '@/config/homepage';
+import { GameAbout } from '@/components/GameAbout';
 import { SEO } from '@/components/SEO';
-import { Gamepad2, Star, Play, Clock, Eye, Tag, Lightbulb, Trophy, RefreshCw, Maximize } from 'lucide-react';
-import Image from 'next/image';
+import { Gamepad2, Play, RefreshCw, Maximize } from 'lucide-react';
 import Link from 'next/link';
 
-export default function HomePage() {
-  const [featuredGames, setFeaturedGames] = useState<any[]>([]);
-  const [popularGames, setPopularGames] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface Game {
+  id: string;
+  slug: string;
+  title: string;
+  name: string;
+  description: string;
+  thumbnail: string;
+  iframe_url: string;
+  category_id: string;
+  tags: string[];
+  rating: number;
+  play_count: number;
+  playCount: number;
+  status: 'active' | 'inactive';
+  created_at: string;
+  updated_at: string;
+}
 
-  const { featuredGame, content, otherGames, seo } = currentConfig;
+interface GameContent {
+  content: {
+    about: {
+      title: string;
+      description: string;
+    };
+  };
+  breadcrumbs: {
+    category: string;
+    gameName: string;
+  };
+  gameName: string;
+}
+
+export default function HomePage() {
+  const [featuredGames, setFeaturedGames] = useState<Game[]>([]);
+  const [featuredGame, setFeaturedGame] = useState<Game | null>(null);
+  const [gameContent, setGameContent] = useState<GameContent | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [featured, popular] = await Promise.all([
+        const [featured] = await Promise.all([
           getFeaturedGames(),
           getPopularGames()
         ]);
         setFeaturedGames(featured);
-        setPopularGames(popular);
+        
+        // Set the first featured game as the main featured game
+        if (featured && featured.length > 0) {
+          setFeaturedGame(featured[0]);
+          
+          // Get game content configuration for the featured game
+          const contentConfig = getGameContentConfig(featured[0].slug);
+          setGameContent(contentConfig);
+        }
       } catch (error) {
         console.error('Error fetching games:', error);
       } finally {
@@ -52,7 +91,7 @@ export default function HomePage() {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || !featuredGame) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <Navigation />
@@ -86,10 +125,10 @@ export default function HomePage() {
                   </span>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                  {content.heroTitle}
+                  {featuredGame.name}
                 </h1>
                 <p className="text-xl text-blue-100">
-                  {content.heroSubtitle}
+                  {featuredGame.description}
                 </p>
               </FadeIn>
             </div>
@@ -161,33 +200,14 @@ export default function HomePage() {
                       </div>
                     </div>
                     
-                    {/* Game Stats */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2">
-                          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                          <span className="font-semibold">{featuredGame.rating} Rating</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Eye className="w-5 h-5" />
-                          <span className="font-semibold">{featuredGame.play_count.toLocaleString()} Plays</span>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-5 h-5" />
-                        <span className="font-semibold">Updated Daily</span>
-                      </div>
-                      
-                      {/* CTA Button */}
-                      <Link 
-                        href={`/games/${featuredGame.slug}/play`}
-                        className="inline-flex items-center gap-3 bg-yellow-400 text-indigo-900 px-6 py-3 rounded-xl font-bold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg"
-                      >
-                        <Play className="w-5 h-5" />
-                        Play Full Screen
-                      </Link>
-                    </div>
+                    {/* CTA Button */}
+                  <Link 
+                    href={`/games/${featuredGame.slug}/play`}
+                    className="inline-flex items-center gap-3 bg-yellow-400 text-indigo-900 px-6 py-3 rounded-xl font-bold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg"
+                  >
+                    <Play className="w-5 h-5" />
+                    Play Full Screen
+                  </Link>
                   </div>
                 </div>
               </FadeIn>
@@ -195,50 +215,14 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Game Instructions */}
-        <section className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <FadeIn duration={600}>
-                <div className="bg-indigo-50 rounded-xl p-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                    <CheckCircle className="w-8 h-8 text-indigo-600" />
-                    How to Play
-                  </h2>
-                  <ul className="space-y-3">
-                    {content.gameInstructions.map((instruction, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-indigo-600 text-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                          {index + 1}
-                        </div>
-                        <span className="text-gray-700">{instruction}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </FadeIn>
-              
-              <FadeIn duration={600} delay={200}>
-                <div className="bg-purple-50 rounded-xl p-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                    <Lightbulb className="w-8 h-8 text-purple-600" />
-                    Pro Tips
-                  </h2>
-                  <ul className="space-y-3">
-                    {content.tips.map((tip, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                          {index + 1}
-                        </div>
-                        <span className="text-gray-700">{tip}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </section>
+        {/* Game About Section */}
+        {gameContent && (
+          <GameAbout 
+            gameSlug={featuredGame.slug}
+            content={gameContent.content}
+            breadcrumbs={gameContent.breadcrumbs}
+          />
+        )}
 
   
         {/* Other Games Section */}
@@ -247,15 +231,15 @@ export default function HomePage() {
             <FadeIn duration={600}>
               <div className="text-center mb-12">
                 <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                  {otherGames.title}
+                  More Games You Might Like
                 </h2>
                 <p className="text-xl text-gray-600">
-                  {otherGames.subtitle}
+                  Discover other exciting games similar to {gameContent?.gameName || featuredGame?.name}
                 </p>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {featuredGames.slice(0, otherGames.limit).map((game, index) => (
+                {featuredGames.slice(0, 8).map((game, index) => (
                   <FadeIn key={game.id} duration={500} delay={index * 100}>
                     <GameCard game={game} />
                   </FadeIn>
@@ -265,27 +249,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Final CTA */}
-        <section className="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <FadeIn duration={600}>
-              <h2 className="text-4xl font-bold mb-6">
-                Ready to Play?
-              </h2>
-              <p className="text-xl text-blue-100 mb-8">
-                {content.callToAction}
-              </p>
-              <Link 
-                href={`/games/${featuredGame.slug}/play`}
-                className="inline-flex items-center gap-3 bg-yellow-400 text-indigo-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg"
-              >
-                <Play className="w-6 h-6" />
-                Play {featuredGame.name} Now
-              </Link>
-            </FadeIn>
-          </div>
-        </section>
-      </main>
+        </main>
       
       <Footer />
     </div>

@@ -59,7 +59,7 @@ export default async function CookiesPage() {
                       {t('cookieTypes.necessary.title')}
                     </h4>
                     <p className="text-gray-600 text-sm mb-2">
-                      {t('cookieTypes.necessary.description'}
+                      {t('cookieTypes.necessary.description')}
                     </p>
                     <p className="text-gray-500 text-sm">
                       <strong>{t('cookieTypes.purpose')}:</strong> {t('cookieTypes.necessary.purpose')}
@@ -71,7 +71,7 @@ export default async function CookiesPage() {
                       {t('cookieTypes.analytics.title')}
                     </h4>
                     <p className="text-gray-600 text-sm mb-2">
-                      {t('cookieTypes.analytics.description'}
+                      {t('cookieTypes.analytics.description')}
                     </p>
                     <p className="text-gray-500 text-sm">
                       <strong>{t('cookieTypes.purpose')}:</strong> {t('cookieTypes.analytics.purpose')}
@@ -83,7 +83,7 @@ export default async function CookiesPage() {
                       {t('cookieTypes.preferences.title')}
                     </h4>
                     <p className="text-gray-600 text-sm mb-2">
-                      {t('cookieTypes.preferences.description'}
+                      {t('cookieTypes.preferences.description')}
                     </p>
                     <p className="text-gray-500 text-sm">
                       <strong>{t('cookieTypes.purpose')}:</strong> {t('cookieTypes.preferences.purpose')}
@@ -95,7 +95,7 @@ export default async function CookiesPage() {
                       {t('cookieTypes.marketing.title')}
                     </h4>
                     <p className="text-gray-600 text-sm mb-2">
-                      {t('cookieTypes.marketing.description'}
+                      {t('cookieTypes.marketing.description')}
                     </p>
                     <p className="text-gray-500 text-sm">
                       <strong>{t('cookieTypes.purpose')}:</strong> {t('cookieTypes.marketing.purpose')}

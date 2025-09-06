@@ -35,9 +35,16 @@ export interface HomePageConfig {
   content: {
     heroTitle: string;
     heroSubtitle: string;
-    gameInstructions: string[];
-    gameFeatures: string[];
-    tips: string[];
+    about?: {
+      title: string;
+      description: string;
+      overview: string[];
+      howToPlay: string[];
+      features: string[];
+    };
+    gameInstructions?: string[];
+    gameFeatures?: string[];
+    tips?: string[];
     callToAction: string;
   };
   
@@ -47,6 +54,12 @@ export interface HomePageConfig {
     subtitle: string;
     limit: number;
     sortBy: 'rating' | 'play_count' | 'created_at';
+  };
+  
+  // 面包屑导航配置
+  breadcrumbs: {
+    category: string;
+    gameName: string;
   };
   
   // 社交分享配置
@@ -86,25 +99,34 @@ export const defaultHomePageConfig: HomePageConfig = {
   content: {
     heroTitle: 'Play 2048 Game Online Free',
     heroSubtitle: 'The addictive puzzle game that took the world by storm',
-    gameInstructions: [
-      'Use your arrow keys to move the tiles',
-      'When two tiles with the same number touch, they merge into one',
-      'Try to create a tile with the number 2048',
-      'You can continue playing after reaching 2048 to get higher scores'
-    ],
-    gameFeatures: [
-      'Smooth and responsive gameplay',
-      'Works perfectly on desktop and mobile',
-      'No download or installation required',
-      'Save your progress automatically',
-      'Compete with players worldwide'
-    ],
-    tips: [
-      'Focus on keeping your largest tile in a corner',
-      'Try to build larger tiles in a descending order',
-      'Plan your moves ahead to avoid getting stuck',
-      'Use the undo button if you make a mistake'
-    ],
+    about: {
+      title: 'About 2048',
+      description: '2048 is a captivating single-player sliding tile puzzle game designed by Italian web developer Gabriele Cirulli. The game quickly became a global phenomenon after its release in March 2014, captivating millions of players with its simple yet addictive mechanics.',
+      overview: [
+        '2048 is played on a 4×4 grid, with numbered tiles that slide when a player moves them using the four arrow keys',
+        'Every turn, a new tile randomly appears in an empty spot with a value of either 2 or 4',
+        'Tiles slide as far as possible in the chosen direction until they are stopped by another tile or the grid edge',
+        'If two tiles of the same number collide during a move, they merge into a tile with the total value of the two colliding tiles',
+        'The resulting tile cannot merge with another tile again in the same move',
+        'The game ends when there are no valid moves left or when you create the 2048 tile'
+      ],
+      howToPlay: [
+        'Use arrow keys (↑↓←→) to move tiles in the desired direction',
+        'When two tiles with the same number touch, they merge into one tile with their sum',
+        'After each move, a new tile (2 or 4) appears in a random empty position',
+        'The goal is to create a tile with the number 2048',
+        'You can continue playing after reaching 2048 to achieve higher scores',
+        'The game ends when the grid is full and no valid moves remain'
+      ],
+      features: [
+        'Simple and intuitive gameplay mechanics',
+        'Strategic depth that challenges players of all skill levels',
+        'Endless replayability with random tile generation',
+        'Satisfying merging mechanics and visual feedback',
+        'Progressive difficulty that keeps you engaged',
+        'Perfect for both casual play and serious competition'
+      ]
+    },
     callToAction: 'Start playing 2048 now and challenge yourself to reach the 2048 tile!'
   },
   
@@ -113,6 +135,11 @@ export const defaultHomePageConfig: HomePageConfig = {
     subtitle: 'Discover other exciting games you might like',
     limit: 8,
     sortBy: 'rating'
+  },
+  
+  breadcrumbs: {
+    category: 'Puzzle Games',
+    gameName: '2048'
   },
   
   social: {
@@ -140,6 +167,10 @@ export const gameConfigs = {
       play_count: 500000,
       category: 'card',
       difficulty: 'easy'
+    },
+    breadcrumbs: {
+      category: 'Card Games',
+      gameName: 'Solitaire Classic'
     },
     seo: {
       title: 'Play Solitaire Classic Online Free - Best Card Game',
@@ -189,6 +220,10 @@ export const gameConfigs = {
       play_count: 750000,
       category: 'puzzle',
       difficulty: 'hard'
+    },
+    breadcrumbs: {
+      category: 'Strategy Games',
+      gameName: 'Minesweeper Classic'
     },
     seo: {
       title: 'Play Minesweeper Classic Online Free - Best Logic Game',

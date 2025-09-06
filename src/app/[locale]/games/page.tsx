@@ -1,10 +1,12 @@
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { GameCard } from '@/components/GameCard';
 import { getAllGames, getGamesByCategory } from '@/lib/games';
 import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
 import { GameFilters } from '@/components/GameFilters';
+import { FadeIn } from '@/components/ui/animations';
 
 interface GamesPageProps {
   searchParams: Promise<{
@@ -53,43 +55,68 @@ export default async function GamesPage({ searchParams }: GamesPageProps) {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navigation />
       
-      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            {t('title')}
-          </h1>
-          <p className="text-gray-600">
-            Browse our collection of free online H5 games
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Filters Sidebar */}
-          <div className="lg:col-span-1">
-            <Suspense fallback={<div>Loading filters...</div>}>
-              <GameFilters />
-            </Suspense>
-          </div>
-
-          {/* Games Grid */}
-          <div className="lg:col-span-3">
-            {games.length === 0 ? (
-              <div className="text-center py-12">
-                <div className="text-gray-400 text-6xl mb-4">🎮</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {t('noGamesFound')}
-                </h3>
-                <p className="text-gray-600">
-                  Try adjusting your filters or search terms
+      <main className="flex-grow">
+        {/* Header Section */}
+        <div className="bg-white shadow-sm border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Breadcrumbs */}
+            <div className="mb-6">
+              <FadeIn duration={400}>
+                <Breadcrumbs 
+                  items={[
+                    { label: params.category ? `${params.category} Games` : 'All Games', href: params.category ? `/categories/${params.category}` : '/games' }
+                  ]}
+                />
+              </FadeIn>
+            </div>
+            
+            <div className="mb-8">
+              <FadeIn duration={600}>
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                  {params.category ? `${params.category} Games` : t('title')}
+                </h1>
+                <p className="text-xl text-gray-600">
+                  {params.category 
+                    ? `Discover the best ${params.category.toLowerCase()} games` 
+                    : 'Browse our collection of free online H5 games'
+                  }
                 </p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {games.map((game) => (
-                  <GameCard key={game.id} game={game} />
-                ))}
-              </div>
-            )}
+              </FadeIn>
+            </div>
+          </div>
+        </div>
+        
+        {/* Games Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Filters Sidebar */}
+            <div className="lg:col-span-1">
+              <Suspense fallback={<div>Loading filters...</div>}>
+                <GameFilters />
+              </Suspense>
+            </div>
+
+            {/* Games Grid */}
+            <div className="lg:col-span-3">
+              {games.length === 0 ? (
+                <div className="text-center py-12">
+                  <div className="text-gray-400 text-6xl mb-4">🎮</div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {t('noGamesFound')}
+                  </h3>
+                  <p className="text-gray-600">
+                    Try adjusting your filters or search terms
+                  </p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {games.map((game) => (
+                    <GameCard key={game.id} game={game} />
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </main>

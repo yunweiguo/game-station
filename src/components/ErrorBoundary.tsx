@@ -31,8 +31,14 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     console.error('Error caught by boundary:', error, errorInfo);
     this.setState({ error, errorInfo });
     
-    // Show toast notification
-    toast.error('Something went wrong', 'Please refresh the page or try again later');
+    // Show toast notification only on client side
+    if (typeof window !== 'undefined') {
+      try {
+        toast.error('Something went wrong', 'Please refresh the page or try again later');
+      } catch (e) {
+        console.error('Failed to show toast:', e);
+      }
+    }
   }
 
   handleReload = () => {
@@ -100,7 +106,13 @@ interface AsyncErrorBoundaryProps {
 export function AsyncErrorBoundary({ children, onError }: AsyncErrorBoundaryProps) {
   const handleError = (error: Error) => {
     console.error('Async error:', error);
-    toast.error('Operation failed', 'Please try again');
+    if (typeof window !== 'undefined') {
+      try {
+        toast.error('Operation failed', 'Please try again');
+      } catch (e) {
+        console.error('Failed to show toast:', e);
+      }
+    }
     onError?.(error);
   };
 
