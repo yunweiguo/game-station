@@ -75,70 +75,32 @@ export default function HomePage() {
       <main className="flex-grow">
         {/* Hero Section with Featured Game */}
         <section className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Game Info */}
-              <div className="space-y-6">
-                <FadeIn duration={800}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <Gamepad2 className="w-8 h-8 text-yellow-400" />
-                    <span className="bg-yellow-400 text-indigo-900 px-3 py-1 rounded-full text-sm font-semibold">
-                      FEATURED GAME
-                    </span>
-                  </div>
-                  <h1 className="text-5xl font-bold mb-4">
-                    {content.heroTitle}
-                  </h1>
-                  <p className="text-xl text-blue-100 mb-6">
-                    {content.heroSubtitle}
-                  </p>
-                  <p className="text-lg text-blue-50 mb-8 leading-relaxed">
-                    {featuredGame.description}
-                  </p>
-                  
-                  {/* Game Stats */}
-                  <div className="flex items-center gap-6 mb-8">
-                    <div className="flex items-center gap-2">
-                      <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                      <span className="font-semibold">{featuredGame.rating} Rating</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Eye className="w-5 h-5" />
-                      <span className="font-semibold">{featuredGame.play_count.toLocaleString()} Plays</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-5 h-5" />
-                      <span className="font-semibold">Updated Daily</span>
-                    </div>
-                  </div>
-                  
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {featuredGame.tags.map((tag) => (
-                      <span 
-                        key={tag}
-                        className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  {/* CTA Button */}
-                  <Link 
-                    href={`/games/${featuredGame.slug}/play`}
-                    className="inline-flex items-center gap-3 bg-yellow-400 text-indigo-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg"
-                  >
-                    <Play className="w-6 h-6" />
-                    Play Now - Free!
-                  </Link>
-                </FadeIn>
-              </div>
-              
-              {/* Game Player */}
-              <div className="relative">
-                <FadeIn duration={800} delay={200}>
-                  <div className="aspect-video bg-black rounded-xl overflow-hidden shadow-2xl">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <FadeIn duration={600}>
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <Gamepad2 className="w-8 h-8 text-yellow-400" />
+                  <span className="bg-yellow-400 text-indigo-900 px-3 py-1 rounded-full text-sm font-semibold">
+                    FEATURED GAME
+                  </span>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                  {content.heroTitle}
+                </h1>
+                <p className="text-xl text-blue-100">
+                  {content.heroSubtitle}
+                </p>
+              </FadeIn>
+            </div>
+
+            {/* Game Container */}
+            <div className="max-w-5xl mx-auto">
+              <FadeIn duration={800}>
+                {/* Game Player */}
+                <div className="relative bg-black rounded-xl overflow-hidden shadow-2xl mb-6">
+                  {/* Main Game Area - Larger height for better gameplay */}
+                  <div className="aspect-[4/3] bg-black">
                     <iframe
                       src={featuredGame.iframe_url}
                       className="w-full h-full border-0"
@@ -174,16 +136,61 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Floating Elements */}
-                  <div className="absolute -top-4 -right-4 bg-yellow-400 text-indigo-900 rounded-full w-16 h-16 flex items-center justify-center font-bold shadow-lg">
-                    FREE
+                </div>
+
+                {/* Game Info Below Game */}
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Game Description */}
+                    <div>
+                      <h2 className="text-2xl font-bold mb-3">{featuredGame.name}</h2>
+                      <p className="text-blue-100 leading-relaxed">
+                        {featuredGame.description}
+                      </p>
+                      
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        {featuredGame.tags.map((tag) => (
+                          <span 
+                            key={tag}
+                            className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Game Stats */}
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                          <span className="font-semibold">{featuredGame.rating} Rating</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Eye className="w-5 h-5" />
+                          <span className="font-semibold">{featuredGame.play_count.toLocaleString()} Plays</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-5 h-5" />
+                        <span className="font-semibold">Updated Daily</span>
+                      </div>
+                      
+                      {/* CTA Button */}
+                      <Link 
+                        href={`/games/${featuredGame.slug}/play`}
+                        className="inline-flex items-center gap-3 bg-yellow-400 text-indigo-900 px-6 py-3 rounded-xl font-bold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg"
+                      >
+                        <Play className="w-5 h-5" />
+                        Play Full Screen
+                      </Link>
+                    </div>
                   </div>
-                  <div className="absolute -bottom-4 -left-4 bg-green-400 text-white rounded-full w-16 h-16 flex items-center justify-center font-bold shadow-lg">
-                    <Trophy className="w-8 h-8" />
-                  </div>
-                </FadeIn>
-              </div>
+                </div>
+              </FadeIn>
             </div>
           </div>
         </section>
