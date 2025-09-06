@@ -8,7 +8,7 @@ import { getFeaturedGames, getPopularGames } from '@/lib/games';
 import { FadeIn } from '@/components/ui/animations';
 import { currentConfig } from '@/config/homepage';
 import { SEO } from '@/components/SEO';
-import { Gamepad2, Star, Play, Clock, Eye, Tag, CheckCircle, Lightbulb, Trophy, RefreshCw, Maximize } from 'lucide-react';
+import { Gamepad2, Star, Play, Clock, Eye, Tag, Lightbulb, Trophy, RefreshCw, Maximize } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -240,40 +240,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Game Features */}
-        <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeIn duration={600}>
-              <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                  Why Play {featuredGame.name}?
-                </h2>
-                <p className="text-xl text-gray-600">
-                  Discover the amazing features that make this game so addictive
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {content.gameFeatures.map((feature, index) => (
-                  <FadeIn key={index} duration={500} delay={index * 100}>
-                    <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-                      <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
-                        <CheckCircle className="w-6 h-6 text-white" />
-                      </div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                        {feature.split(' ')[0]} {feature.split(' ')[1]}
-                      </h3>
-                      <p className="text-gray-600">
-                        {feature}
-                      </p>
-                    </div>
-                  </FadeIn>
-                ))}
-              </div>
-            </FadeIn>
-          </div>
-        </section>
-
+  
         {/* Other Games Section */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
