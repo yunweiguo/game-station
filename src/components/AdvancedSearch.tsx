@@ -120,7 +120,7 @@ export function AdvancedSearch({ onSearch, availableTags, availableCategories }:
         <DialogHeader>
           <DialogTitle>Advanced Search</DialogTitle>
           <DialogDescription>
-            Filter games by various criteria to find exactly what you're looking for.
+            Filter games by various criteria to find exactly what you&apos;re looking for.
           </DialogDescription>
         </DialogHeader>
         

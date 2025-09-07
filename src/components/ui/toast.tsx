@@ -105,9 +105,9 @@ export function ToastContainer() {
 
   // Expose addToast to window for global access
   useEffect(() => {
-    (window as Record<string, unknown>).toast = addToast;
+    (window as { toast?: typeof addToast }).toast = addToast;
     return () => {
-      delete (window as Record<string, unknown>).toast;
+      delete (window as { toast?: typeof addToast }).toast;
     };
   }, []);
 
@@ -123,15 +123,15 @@ export function ToastContainer() {
 // Helper functions for common toast types
 export const toast = {
   success: (title: string, message?: string) => {
-    (window as Record<string, (toast: Omit<Toast, 'id'>) => void>).toast?.({ type: 'success', title, message });
+    (window as { toast?: (toast: Omit<Toast, 'id'>) => void }).toast?.({ type: 'success', title, message });
   },
   error: (title: string, message?: string) => {
-    (window as Record<string, (toast: Omit<Toast, 'id'>) => void>).toast?.({ type: 'error', title, message });
+    (window as { toast?: (toast: Omit<Toast, 'id'>) => void }).toast?.({ type: 'error', title, message });
   },
   warning: (title: string, message?: string) => {
-    (window as Record<string, (toast: Omit<Toast, 'id'>) => void>).toast?.({ type: 'warning', title, message });
+    (window as { toast?: (toast: Omit<Toast, 'id'>) => void }).toast?.({ type: 'warning', title, message });
   },
   info: (title: string, message?: string) => {
-    (window as Record<string, (toast: Omit<Toast, 'id'>) => void>).toast?.({ type: 'info', title, message });
+    (window as { toast?: (toast: Omit<Toast, 'id'>) => void }).toast?.({ type: 'info', title, message });
   }
 };

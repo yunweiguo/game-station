@@ -69,7 +69,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     // 检查游戏是否存在
     const { data: existingGame } = await supabase
       .from('games')
-      .select('id, slug')
+      .select('*')
       .eq('id', id)
       .single()
 

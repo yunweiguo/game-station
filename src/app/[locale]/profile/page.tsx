@@ -25,6 +25,21 @@ interface UserProfile {
   }>
 }
 
+interface UserStats {
+  total_play_time: number
+  total_play_count: number
+  current_streak: number
+}
+
+interface Achievement {
+  id: string
+  name: string
+  description: string
+  icon: string
+  points: number
+  unlocked: boolean
+}
+
 export default function ProfilePage() {
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -33,8 +48,8 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState<UserProfile>({})
   const [favoriteGames, setFavoriteGames] = useState<Game[]>([])
   const [historyGames, setHistoryGames] = useState<Game[]>([])
-  const [userStats, setUserStats] = useState<any>(null)
-  const [achievements, setAchievements] = useState<any[]>([])
+  const [userStats, setUserStats] = useState<UserStats | null>(null)
+  const [achievements, setAchievements] = useState<Achievement[]>([])
   const [isEditing, setIsEditing] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [username, setUsername] = useState("")

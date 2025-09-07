@@ -9,7 +9,7 @@ import { ToastContainer } from "@/components/ui/toast"
 // Client-side providers wrapper
 function ClientProviders({ children, messages, locale }: { 
   children: React.ReactNode, 
-  messages: any, 
+  messages: Record<string, unknown>, 
   locale: string 
 }) {
   return (

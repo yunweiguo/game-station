@@ -226,12 +226,13 @@ export async function POST(request: NextRequest) {
     } catch (error) {
       console.error('Error updating game history:', error);
       // 如果表不存在，静默失败而不是返回错误
-      if (error.code === '42P01' || error.message?.includes('relation "user_game_history" does not exist')) {
+      const err = error as { code?: string; message?: string };
+      if (err.code === '42P01' || err.message?.includes('relation "user_game_history" does not exist')) {
         console.warn('user_game_history table does not exist, skipping history update');
         return NextResponse.json({ success: true, message: 'Table not initialized, skipping update' });
       }
       // 如果是RLS策略错误（用户未登录），这也是正常的
-      if (error.code === '42501' || error.message?.includes('row-level security policy')) {
+      if (err.code === '42501' || err.message?.includes('row-level security policy')) {
         console.warn('User not authenticated or RLS policy violation, skipping history update');
         return NextResponse.json({ success: true, message: 'User not authenticated, skipping update' });
       }
@@ -279,7 +280,8 @@ export async function DELETE(request: NextRequest) {
     } catch (error) {
       console.error('Error deleting game history:', error);
       // 如果表不存在，静默成功
-      if (error.code === '42P01' || error.message?.includes('relation "user_game_history" does not exist')) {
+      const err = error as { code?: string; message?: string };
+      if (err.code === '42P01' || err.message?.includes('relation "user_game_history" does not exist')) {
         return NextResponse.json({ success: true, message: 'Table not initialized, nothing to delete' });
       }
       return NextResponse.json({ error: 'Failed to delete game history' }, { status: 500 });
@@ -323,7 +325,8 @@ export async function PUT(request: NextRequest) {
       } catch (error) {
         console.error('Error clearing game history:', error);
         // 如果表不存在，静默成功
-        if (error.code === '42P01' || error.message?.includes('relation "user_game_history" does not exist')) {
+        const err = error as { code?: string; message?: string };
+        if (err.code === '42P01' || err.message?.includes('relation "user_game_history" does not exist')) {
           return NextResponse.json({ success: true, message: 'Table not initialized, nothing to clear' });
         }
         return NextResponse.json({ error: 'Failed to clear game history' }, { status: 500 });

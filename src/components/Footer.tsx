@@ -101,7 +101,7 @@ export function Footer() {
                         target={link.href.startsWith('mailto') ? '_self' : '_blank'}
                         rel={link.href.startsWith('mailto') ? '' : 'noopener noreferrer'}
                       >
-                        {link.icon && <link.icon className="w-4 h-4" />}
+                        {'icon' in link && link.icon && <link.icon className="w-4 h-4" />}
                         {link.label}
                       </a>
                     ) : (

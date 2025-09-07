@@ -1,24 +1,22 @@
 'use client';
 
 import { useState, useEffect, use } from 'react';
-import { useParams, useRouter } from 'next/navigation';
 import { Gamepad2, ArrowLeft, Star, Eye, Clock, Tag, Maximize, Minimize, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getGameBySlug, getRelatedGames } from '@/lib/games';
+import { getGameBySlug, getRelatedGames, Game } from '@/lib/games';
 import { GameCard } from '@/components/GameCard';
 
 interface GamePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default function GamePlayPage({ params }: GamePageProps) {
   const { slug } = use(params);
-  const router = useRouter();
-  const [game, setGame] = useState<any>(null);
-  const [relatedGames, setRelatedGames] = useState<any[]>([]);
+  const [game, setGame] = useState<Game | null>(null);
+  const [relatedGames, setRelatedGames] = useState<Game[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
 

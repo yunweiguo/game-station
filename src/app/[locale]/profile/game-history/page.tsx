@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { GameCard } from '@/components/GameCard';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Loading } from '@/components/ui/loading';
 import { toast } from '@/components/ui/toast';
 import { FadeIn, StaggeredList } from '@/components/ui/animations';
@@ -61,18 +61,7 @@ export default function GameHistoryPage() {
   const [hasMore, setHasMore] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/en/auth/signin');
-      return;
-    }
-
-    if (status === 'authenticated') {
-      fetchHistory();
-    }
-  }, [status, page]);
-
-  const fetchHistory = async () => {
+  const fetchHistory = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(`/api/user/game-history?page=${page}&limit=12`);
@@ -97,7 +86,18 @@ export default function GameHistoryPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, t]);
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/en/auth/signin');
+      return;
+    }
+
+    if (status === 'authenticated') {
+      fetchHistory();
+    }
+  }, [status, page, fetchHistory, router]);
 
   const handleDeleteHistory = async (gameId: string) => {
     if (!confirm(t('confirm.deleteGame'))) {
@@ -179,7 +179,7 @@ export default function GameHistoryPage() {
   if (status === 'loading' || loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Loading size="lg" />
+        <Loading />
       </div>
     );
   }
@@ -307,9 +307,11 @@ export default function GameHistoryPage() {
                             onClick={() => router.push(`/games/${item.games.id}`)}
                           >
                             <div className="relative group">
-                              <img
+                              <Image
                                 src={item.games.thumbnail}
                                 alt={item.games.name}
+                                width={200}
+                                height={150}
                                 className="w-full h-48 object-cover rounded-lg group-hover:opacity-90 transition-opacity"
                               />
                               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all rounded-lg flex items-center justify-center">
@@ -397,7 +399,7 @@ export default function GameHistoryPage() {
                   onClick={() => setPage(prev => prev + 1)}
                   disabled={loading}
                 >
-                  {loading ? <Loading size="sm" /> : t('actions.loadMore')}
+                  {loading ? <Loading /> : t('actions.loadMore')}
                 </Button>
               </div>
             )}

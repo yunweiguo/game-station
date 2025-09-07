@@ -20,25 +20,25 @@ export interface FormField {
     maxLength?: number;
     min?: number;
     max?: number;
-    custom?: (value: any) => string | null;
+    custom?: (value: unknown) => string | null;
   };
 }
 
 interface EnhancedFormProps {
   fields: FormField[];
-  onSubmit: (data: Record<string, any>) => Promise<void>;
+  onSubmit: (data: Record<string, unknown>) => Promise<void>;
   submitText?: string;
   loadingText?: string;
   className?: string;
-  initialValues?: Record<string, any>;
+  initialValues?: Record<string, unknown>;
   showSuccessMessage?: boolean;
   successMessage?: string;
   resetOnSuccess?: boolean;
 }
 
 interface FormState {
-  values: Record<string, any>;
-  errors: Record<string, string>;
+  values: Record<string, unknown>;
+  errors: Record<string, string | null>;
   touched: Record<string, boolean>;
   isLoading: boolean;
   showPassword: Record<string, boolean>;
@@ -65,7 +65,7 @@ export function EnhancedForm({
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const validateField = (field: FormField, value: any): string | null => {
+  const validateField = (field: FormField, value: unknown): string | null => {
     if (field.required && (!value || value.toString().trim() === '')) {
       return `${field.label} is required`;
     }
@@ -85,11 +85,11 @@ export function EnhancedForm({
         return `${field.label} must be no more than ${maxLength} characters`;
       }
 
-      if (min && parseFloat(value) < min) {
+      if (min && parseFloat(String(value)) < min) {
         return `${field.label} must be at least ${min}`;
       }
 
-      if (max && parseFloat(value) > max) {
+      if (max && parseFloat(String(value)) > max) {
         return `${field.label} must be no more than ${max}`;
       }
 
@@ -101,7 +101,7 @@ export function EnhancedForm({
     return null;
   };
 
-  const handleFieldChange = (fieldName: string, value: any) => {
+  const handleFieldChange = (fieldName: string, value: unknown) => {
     setFormState(prev => {
       const field = fields.find(f => f.name === fieldName);
       const error = field ? validateField(field, value) : null;
@@ -209,16 +209,27 @@ export function EnhancedForm({
       case 'textarea':
         return (
           <textarea
-            {...commonProps}
-            placeholder={field.placeholder}
-            rows={4}
-            className={cn(commonProps.className, "resize-none")}
+              placeholder={field.placeholder}
+              rows={4}
+              id={commonProps.id}
+              name={commonProps.name}
+              value={String(commonProps.value)}
+              onChange={commonProps.onChange}
+              onBlur={commonProps.onBlur}
+              className={cn(commonProps.className, "resize-none")}
           />
         );
 
       case 'select':
         return (
-          <select {...commonProps}>
+          <select
+            id={commonProps.id}
+            name={commonProps.name}
+            value={String(commonProps.value)}
+            onChange={commonProps.onChange}
+            onBlur={commonProps.onBlur}
+            className={commonProps.className}
+          >
             <option value="">{field.placeholder || `Select ${field.label}`}</option>
             {field.options?.map(option => (
               <option key={option.value} value={option.value}>
@@ -232,9 +243,12 @@ export function EnhancedForm({
         return (
           <div className="flex items-center">
             <input
-              {...commonProps}
+              id={commonProps.id}
+              name={commonProps.name}
+              className={commonProps.className}
+              onBlur={commonProps.onBlur}
               type="checkbox"
-              checked={value}
+              checked={Boolean(value)}
               onChange={(e) => handleFieldChange(field.name, e.target.checked)}
             />
             <label htmlFor={field.name} className="text-sm text-gray-700">
@@ -267,7 +281,12 @@ export function EnhancedForm({
         return (
           <div className="relative">
             <input
-              {...commonProps}
+              id={commonProps.id}
+              name={commonProps.name}
+              value={String(commonProps.value)}
+              onChange={commonProps.onChange}
+              onBlur={commonProps.onBlur}
+              className={commonProps.className}
               type={formState.showPassword[field.name] ? 'text' : 'password'}
               placeholder={field.placeholder}
             />
@@ -287,7 +306,12 @@ export function EnhancedForm({
       default:
         return (
           <input
-            {...commonProps}
+            id={commonProps.id}
+            name={commonProps.name}
+            value={String(commonProps.value)}
+            onChange={commonProps.onChange}
+            onBlur={commonProps.onBlur}
+            className={commonProps.className}
             type={field.type}
             placeholder={field.placeholder}
           />
@@ -310,16 +334,16 @@ export function EnhancedForm({
           
           {renderField(field)}
           
-          {showError && (
+          {formState.errors[field.name] && formState.touched[field.name] && (
             <div className="flex items-center gap-1 text-sm text-red-600">
               <AlertCircle className="w-4 h-4" />
-              <span>{error}</span>
+              <span>{formState.errors[field.name]}</span>
             </div>
           )}
           
           {field.validation?.maxLength && (
             <div className="text-xs text-gray-500">
-              {value?.length || 0} / {field.validation.maxLength} characters
+              {String(formState.values[field.name] || '').length} / {field.validation.maxLength} characters
             </div>
           )}
         </div>

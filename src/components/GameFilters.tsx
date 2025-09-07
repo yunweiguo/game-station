@@ -204,7 +204,7 @@ export function GameFilters() {
           <div className="flex flex-wrap gap-1">
             {currentSearch && (
               <Badge variant="outline" className="text-xs">
-                Search: "{currentSearch}"
+                Search: &quot;{currentSearch}&quot;
               </Badge>
             )}
             {currentCategory && (

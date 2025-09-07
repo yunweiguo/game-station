@@ -8,10 +8,24 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Badge } from '@/components/ui/badge';
 import { Filter, X } from 'lucide-react';
 
+interface SearchFilters {
+  query: string
+  category: string
+  tags: string[]
+  minRating?: number
+  maxRating?: number
+  difficulty?: string
+  sortBy: string
+  sortOrder: string
+  featured?: boolean
+  popular?: boolean
+  new?: boolean
+}
+
 interface AdvancedSearchClientProps {
   availableTags: string[];
   availableCategories: Array<{ id: string; name: string; slug: string }>;
-  onSearch: (filters: any) => void;
+  onSearch: (filters: SearchFilters) => void;
 }
 
 export function AdvancedSearchClient({ availableTags, availableCategories, onSearch }: AdvancedSearchClientProps) {

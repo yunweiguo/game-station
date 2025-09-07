@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { GameCard } from './GameCard';
 import { GameListSkeleton } from './ui/skeleton';
 import { Loading } from './ui/loading';
@@ -168,7 +168,7 @@ export function GameListContainer({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const loadGames = async () => {
+  const loadGames = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -181,11 +181,11 @@ export function GameListContainer({
     } finally {
       setLoading(false);
     }
-  };
+  }, [fetchGames]);
 
   useEffect(() => {
     loadGames();
-  }, []);
+  }, [loadGames]);
 
   // Auto-retry on error
   useEffect(() => {
@@ -193,7 +193,7 @@ export function GameListContainer({
       const timer = setTimeout(loadGames, retryInterval);
       return () => clearTimeout(timer);
     }
-  }, [error, retryInterval]);
+  }, [error, retryInterval, loadGames]);
 
   return (
     <GameList

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 
 interface Game {
   id: string
@@ -30,10 +31,26 @@ interface Category {
   slug: string
 }
 
+interface GameFormData {
+  title?: string
+  name?: string
+  description: string
+  category_id: string
+  thumbnail: string
+  iframe_url: string
+  tags: string | string[]
+  featured: boolean
+  popular: boolean
+  new: boolean
+  trending: boolean
+  status: 'active' | 'inactive' | 'pending'
+  slug?: string
+}
+
 interface GameFormProps {
   game: Game | null
   categories: Category[]
-  onSave: (gameData: any) => void
+  onSave: (gameData: GameFormData) => void
   onCancel: () => void
 }
 
@@ -372,9 +389,11 @@ export function GameForm({ game, categories, onSave, onCancel }: GameFormProps) 
               <div className="border rounded-lg p-4 bg-gray-50">
                 <div className="flex items-center space-x-4">
                   {formData.thumbnail && (
-                    <img
+                    <Image
                       src={formData.thumbnail}
                       alt="预览"
+                      width={80}
+                      height={80}
                       className="w-20 h-20 rounded-md object-cover"
                       onError={(e) => {
                         e.currentTarget.src = '/images/default-game.jpg'

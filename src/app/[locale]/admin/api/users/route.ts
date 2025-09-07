@@ -62,7 +62,20 @@ export async function GET(request: NextRequest) {
     }
 
     // 转换数据格式
-    const formattedUsers = users.map((user: { id: string; username: string; email: string; name: string; createdAt: Date; updatedAt: Date }) => ({
+    const formattedUsers = users.map((user: { 
+      id: string; 
+      username: string; 
+      email: string; 
+      name: string; 
+      avatar?: string;
+      role?: string;
+      status?: string;
+      email_verified?: boolean;
+      created_at: string;
+      last_active_at?: string;
+      createdAt: Date; 
+      updatedAt: Date;
+    }) => ({
       id: user.id,
       username: user.username,
       email: user.email,

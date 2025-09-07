@@ -1,7 +1,7 @@
 'use client';
 
 import { GameCard } from '@/components/GameCard';
-import { advancedSearchGames, AdvancedSearchFilters } from '@/lib/games';
+import { advancedSearchGames, AdvancedSearchFilters, Game } from '@/lib/games';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
@@ -23,7 +23,7 @@ interface SearchResultsClientProps {
 
 export function SearchResultsClient({ query, searchParams }: SearchResultsClientProps) {
   const t = useTranslations('games');
-  const [games, setGames] = useState<any[]>([]);
+  const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,9 +37,9 @@ export function SearchResultsClient({ query, searchParams }: SearchResultsClient
         tags: searchParams?.tags ? searchParams.tags.split(',') : [],
         minRating: searchParams?.minRating ? parseFloat(searchParams.minRating) : undefined,
         maxRating: searchParams?.maxRating ? parseFloat(searchParams.maxRating) : undefined,
-        sortBy: searchParams?.sortBy as any || 'relevance',
-        sortOrder: searchParams?.sortOrder as any || 'desc',
-        difficulty: searchParams?.difficulty && searchParams.difficulty !== 'any' ? searchParams.difficulty as any : undefined,
+        sortBy: (searchParams?.sortBy as 'relevance' | 'rating' | 'play_count' | 'created_at') || 'relevance',
+        sortOrder: (searchParams?.sortOrder as 'asc' | 'desc') || 'desc',
+        difficulty: searchParams?.difficulty && searchParams.difficulty !== 'any' ? (searchParams.difficulty as 'easy' | 'medium' | 'hard') : undefined,
         featured: searchParams?.featured === 'true',
         popular: searchParams?.popular === 'true',
         new: searchParams?.new === 'true',
@@ -89,7 +89,7 @@ export function SearchResultsClient({ query, searchParams }: SearchResultsClient
           {t('noGamesFound')}
         </h3>
         <p className="text-gray-600">
-          No games found matching "{query}". Try a different search term.
+          No games found matching &quot;{query}&quot;. Try a different search term.
         </p>
       </div>
     );

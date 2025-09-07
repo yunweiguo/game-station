@@ -66,7 +66,7 @@ export function SEO({
     updatePropertyTag('og:type', 'website');
     updatePropertyTag('og:title', finalOgTitle);
     updatePropertyTag('og:description', finalOgDescription);
-    updatePropertyTag('og:image', finalOgImage);
+    if (finalOgImage) updatePropertyTag('og:image', finalOgImage);
     updatePropertyTag('og:site_name', 'Game Station');
     updatePropertyTag('og:locale', 'en_US');
     
@@ -74,7 +74,7 @@ export function SEO({
     updateMetaTag('twitter:card', 'summary_large_image');
     updateMetaTag('twitter:title', finalOgTitle);
     updateMetaTag('twitter:description', finalOgDescription);
-    updateMetaTag('twitter:image', finalOgImage);
+    if (finalOgImage) updateMetaTag('twitter:image', finalOgImage);
     updateMetaTag('twitter:site', '@GameStation');
     
     // Update canonical URL

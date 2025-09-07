@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useTranslations } from 'next-intl'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Trophy, Clock, Target, Star, Bell, CheckCircle, TrendingUp, Award, Lock } from 'lucide-react'
+import { Trophy, Clock, Target, Star, CheckCircle, TrendingUp } from 'lucide-react'
 import { useSession } from "next-auth/react"
 
 interface Achievement {
@@ -55,13 +55,7 @@ export default function AchievementsPage() {
   const [activeTab, setActiveTab] = useState('achievements')
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (session) {
-      fetchData()
-    }
-  }, [session])
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -94,7 +88,13 @@ export default function AchievementsPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [t])
+
+  useEffect(() => {
+    if (session) {
+      fetchData()
+    }
+  }, [session, fetchData])
 
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600)
@@ -113,8 +113,8 @@ export default function AchievementsPage() {
   }
 
   const unlockedAchievements = achievements.filter(a => a.unlocked)
-  const inProgressAchievements = achievements.filter(a => !a.unlocked && a.progress > 0)
-  const lockedAchievements = achievements.filter(a => !a.unlocked && a.progress === 0)
+  const inProgressAchievements = achievements.filter(a => !a.unlocked && (a.progress || 0) > 0)
+  const lockedAchievements = achievements.filter(a => !a.unlocked && (a.progress || 0) === 0)
   const unreadNotifications = notifications.filter(n => !n.read)
 
   if (loading) {

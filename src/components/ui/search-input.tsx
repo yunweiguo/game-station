@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -109,6 +109,29 @@ export function SearchInput({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handleSearch = useCallback(() => {
+    if (onSearch) {
+      onSearch(value);
+    }
+    if (clearOnSearch) {
+      onChange('');
+    }
+    setShowSuggestions(false);
+    setFocusedIndex(-1);
+  }, [onSearch, value, clearOnSearch, onChange]);
+
+  const handleSuggestionSelect = useCallback((suggestion: string) => {
+    onChange(suggestion);
+    setShowSuggestions(false);
+    setFocusedIndex(-1);
+    if (onSuggestionSelect) {
+      onSuggestionSelect(suggestion);
+    }
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [onChange, onSuggestionSelect]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     onChange(newValue);
@@ -120,29 +143,6 @@ export function SearchInput({
     onChange('');
     setShowSuggestions(false);
     setFocusedIndex(-1);
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
-  const handleSearch = () => {
-    if (onSearch) {
-      onSearch(value);
-    }
-    if (clearOnSearch) {
-      onChange('');
-    }
-    setShowSuggestions(false);
-    setFocusedIndex(-1);
-  };
-
-  const handleSuggestionSelect = (suggestion: string) => {
-    onChange(suggestion);
-    setShowSuggestions(false);
-    setFocusedIndex(-1);
-    if (onSuggestionSelect) {
-      onSuggestionSelect(suggestion);
-    }
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -250,7 +250,7 @@ export function SearchInput({
 interface AdvancedSearchFiltersProps {
   categories: Array<{ id: string; name: string }>;
   tags: string[];
-  onFiltersChange: (filters: any) => void;
+  onFiltersChange: (filters: Record<string, unknown>) => void;
   className?: string;
 }
 
@@ -278,7 +278,7 @@ export function AdvancedSearchFilters({
     onFiltersChange(newFilters);
   };
 
-  const handleFilterChange = (key: string, value: any) => {
+  const handleFilterChange = (key: string, value: unknown) => {
     const newFilters = { ...filters, [key]: value };
     setFilters(newFilters);
     onFiltersChange(newFilters);

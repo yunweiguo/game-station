@@ -22,7 +22,21 @@ function SearchContent() {
     loadCategories();
   }, []);
 
-  const handleAdvancedSearch = (filters: any) => {
+  interface SearchFilters {
+    query: string
+    category: string
+    tags: string[]
+    minRating?: number
+    maxRating?: number
+    difficulty?: string
+    sortBy: string
+    sortOrder: string
+    featured?: boolean
+    popular?: boolean
+    new?: boolean
+  }
+
+  const handleAdvancedSearch = (filters: SearchFilters) => {
     // Build search params from filters
     const params = new URLSearchParams();
     

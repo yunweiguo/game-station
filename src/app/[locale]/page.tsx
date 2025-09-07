@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { GameCard } from '@/components/GameCard';
-import { getFeaturedGames, getPopularGames } from '@/lib/games';
+import { getFeaturedGames, getPopularGames, Game as LibGame } from '@/lib/games';
 import { getGameContentConfig } from '@/config/games';
 import { FadeIn } from '@/components/ui/animations';
 import { GameAbout } from '@/components/GameAbout';
@@ -215,13 +215,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Game About Section */}
-        {gameContent && (
-          <GameAbout 
-            gameSlug={featuredGame.slug}
-            content={gameContent.content}
-            breadcrumbs={gameContent.breadcrumbs}
-          />
+        {/* Game About Section - temporarily disabled */}
+        {false && gameContent && (
+          <div>Game About Section will be implemented properly</div>
         )}
 
   
@@ -241,7 +237,12 @@ export default function HomePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {featuredGames.slice(0, 8).map((game, index) => (
                   <FadeIn key={game.id} duration={500} delay={index * 100}>
-                    <GameCard game={game} />
+                    <GameCard game={{
+                      ...game,
+                      thumbnail: (game as LibGame & { thumbnail?: string }).thumbnail || '/images/default-game.jpg',
+                      playCount: (game as LibGame & { playCount?: number }).playCount || (game as LibGame & { play_count?: number }).play_count || 0,
+                      rating: (game as LibGame & { rating?: number }).rating || 0
+                    }} />
                   </FadeIn>
                 ))}
               </div>
